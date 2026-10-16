@@ -1,5 +1,25 @@
 const $ = (s, root=document) => root.querySelector(s);
-const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+const $ = (s, root=document) => [...root.querySelectorAll(s)];
+
+// Early, capture-phase Start handler so the menu still opens even if a later
+// prototype widget encounters an unrelated initialization error.
+document.addEventListener("click", e => {
+ const trigger = e.target.closest("#startButton");
+ if (!trigger) return;
+ e.preventDefault();
+ e.stopImmediatePropagation();
+ const menu = document.querySelector("#startMenu");
+ if (!menu) return;
+ const opening = menu.classList.contains("hidden");
+ document.querySelectorAll("#rightPanel,#workspaces,#powerDialog").forEach(panel => panel.classList.add("hidden"));
+ menu.classList.toggle("hidden", !opening);
+ trigger.setAttribute("aria-controls", "startMenu");
+ trigger.setAttribute("aria-expanded", String(opening));
+ if (opening) {
+   const input = document.querySelector("#commandInput");
+   if (input) setTimeout(() => input.focus(), 50);
+ }
+}, true);
 const appNames = [
  ["Edge","e"],["Mail","✉"],["Calendar","▦"],["Photos","▧"],["Settings","⚙"],["Calculator","⌗"],
  ["Notepad","▤"],["Paint","◉"],["File Explorer","▰"],["Terminal","›_"],["Visual Studio Code","⌘"],["Adobe Photoshop","Ps"],
