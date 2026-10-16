@@ -86,14 +86,3 @@
  .start-trigger img{width:25px;height:25px}
  .edge-logo,.store-logo{width:24px;height:24px}
 }
-
-
-/* Consistent outer hover outline for interactive elements; does not affect layout. */
-:where(button,[role="button"],.desktop-icon,.app-item,.workspace-card,.notification,.date-card,.media-card,.slider-card,.settings-list button,.window-card):hover{
-  outline:1px solid rgba(255,255,255,.82);
-  outline-offset:1px;
-}
-:where(input,textarea,select):hover{
-  outline:1px solid rgba(255,255,255,.82);
-  outline-offset:1px;
-}
