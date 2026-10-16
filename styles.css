@@ -307,3 +307,18 @@ button:focus-visible,input:focus-visible{
   border-color:rgba(255,255,255,.86);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.96),inset 0 -1px 0 rgba(255,255,255,.16),0 2px 6px rgba(62,39,91,.06);
 }
+
+
+/* Start menu app icons: larger artwork while preserving the six-column layout. */
+.app-icon{
+  width:46px;
+  height:46px;
+}
+.app-item{
+  min-height:94px;
+  gap:6px;
+}
+@media(max-width:760px){
+  .app-icon{width:39px;height:39px}
+  .app-item{min-height:79px}
+}
