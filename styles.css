@@ -44,3 +44,13 @@
 /* Battery icon size adjustment only */
 .battery-icon{width:50px;max-height:32px}
 @media(max-width:760px){.battery-icon{width:44px;max-height:29px}}
+
+/* Wallpaper rendering pass: preserve the exact source asset and desktop composition. */
+.wallpaper{
+  background-size:cover;
+  background-position:center center;
+  image-rendering:auto;
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
+  backface-visibility:hidden;
+}
