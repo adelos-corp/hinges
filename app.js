@@ -9,12 +9,26 @@ const appNames = [
  ["Chrome","◉"],["WhatsApp","◔"],["Telegram","➤"],["Steam","◉"],["Epic Games","E"],["GeForce Experience","NVIDIA"]
 ];
 const appGlyphs = {"Edge":"e","Mail":"✉","Calendar":"▦","Photos":"▧","Settings":"⚙","Calculator":"⌗","Notepad":"▤","Paint":"◉","File Explorer":"▰","Terminal":"›_","Visual Studio Code":"⌘","Adobe Photoshop":"Ps","Spotify":"◖","Discord":"◉","Figma":"◈","CapCut":"⌁","Blender":"♧","DaVinci Resolve":"◉","Word":"W","Excel":"X","PowerPoint":"P","OneNote":"N","Outlook":"O","Teams":"T","Chrome":"◉","WhatsApp":"◔","Telegram":"➤","Steam":"◉","Epic Games":"E","GeForce Experience":"N"};
+const appIcons = {
+ "Edge":"microsoft-edge","Mail":"mail","Calendar":"calendar","Photos":"photos","Settings":"settings","Calculator":"calculator",
+ "Notepad":"notepad","Paint":"paint","File Explorer":"file-explorer","Terminal":"console","Visual Studio Code":"visual-studio-code-2019","Adobe Photoshop":"adobe-photoshop",
+ "Spotify":"spotify","Discord":"discord","Figma":"figma","CapCut":"capcut","Blender":"blender-3d","DaVinci Resolve":"davinci-resolve",
+ "Word":"microsoft-word-2019","Excel":"microsoft-excel-2019","PowerPoint":"microsoft-powerpoint-2019","OneNote":"microsoft-onenote-2019","Outlook":"microsoft-outlook-2019","Teams":"microsoft-teams-2019",
+ "Chrome":"google-chrome","WhatsApp":"whatsapp","Telegram":"telegram-app","Steam":"steam","Epic Games":"epic-games","GeForce Experience":"nvidia"
+};
 const appGrid = $("#appGrid");
-appNames.forEach(([name,glyph],i)=>{
- const b=document.createElement("button"); b.className="app-item"; b.dataset.open=name;
- b.innerHTML='<span class="app-icon" aria-hidden="true">'+glyph+'</span><span>'+name+'</span>';
- appGrid.appendChild(b);
-});
+if(appGrid){
+ appNames.forEach(([name,glyph])=>{
+  const b=document.createElement("button");
+  b.className="app-item"; b.dataset.open=name;
+  const icon=document.createElement("img");
+  icon.className="app-icon"; icon.alt=""; icon.loading="lazy";
+  icon.src="https://img.icons8.com/fluency/48/"+(appIcons[name]||"application-window").replace(/ /g,"-")+".png";
+  icon.onerror=()=>{const fallback=document.createElement("span");fallback.className="app-icon app-icon-fallback";fallback.textContent=glyph;icon.replaceWith(fallback)};
+  const label=document.createElement("span");label.textContent=name;
+  b.append(icon,label);appGrid.appendChild(b);
+ });
+}
 let activeSpace=1, spaces=1, nextWindowId=1, toastTimer, trackIndex=0, isPlaying=false;
 const openWindows=[];
 const states={wifi:true,bluetooth:true,airplane:false,battery:false,night:false,focus:false,keyboard:false,sound:true};
