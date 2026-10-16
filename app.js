@@ -42,7 +42,10 @@ function toggleState(key){
  if(key==="airplane"&&states.airplane){states.wifi=false;states.bluetooth=false}
  if((key==="wifi"||key==="bluetooth")&&states[key])states.airplane=false;
  if(key==="night")$("#desktop").classList.toggle("night-mode",states.night);
- renderStates();
+ $("#appGrid").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(b)openApp(b.dataset.open)});
+$(".desktop-icons [data-open],.taskbar [data-open]").forEach(b=>b.addEventListener("click",()=>openApp(b.dataset.open)));
+$("#binIcon").addEventListener("dblclick",()=>openApp("Bin"));
+renderStates();
  const labels={wifi:"Wi-Fi",bluetooth:"Bluetooth",airplane:"Airplane mode",battery:"Battery saver",night:"Night light",focus:"Focus mode",keyboard:"Keyboard",sound:"Sound"};
  toast((labels[key]||key)+" "+(states[key]?"turned on":"turned off"));
 }
