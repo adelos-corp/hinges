@@ -36,3 +36,7 @@
  .battery-icon{width:20px}
  .chevron-button{width:20px}
 }
+
+/* Battery icon size adjustment only */
+.battery-icon{width:30px;max-height:20px}
+@media(max-width:760px){.battery-icon{width:26px;max-height:18px}}
