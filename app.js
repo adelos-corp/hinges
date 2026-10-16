@@ -41,7 +41,7 @@ function toggleWorkspaces(){const el=$("#workspaces");if(!el.classList.contains(
 function updateDateTime(){
  const now=new Date();
  const zone="Asia/Kolkata";
- $("#clockTime").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,hour:"numeric",minute:"2-digit",hour12:true}).format(now)+" IST";
+ $("#clockTime").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,hour:"numeric",minute:"2-digit",hour12:true}).format(now);
  $("#clockDate").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,day:"2-digit",month:"2-digit",year:"numeric"}).format(now);
  $("#dateDay").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,weekday:"long"}).format(now).toUpperCase();
  $("#dateFull").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,day:"numeric",month:"long",year:"numeric"}).format(now);
