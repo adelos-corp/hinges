@@ -3,7 +3,7 @@ const $$ = (s, root=document) => [...root.querySelectorAll(s)];
 
 const appNames = [
  ["Edge","e"],["Mail","✉"],["Calendar","▦"],["Photos","▧"],["Settings","⚙"],["Calculator","⌗"],
- ["Notepad","▤"],["Paint","◉"],["File Explorer","▰"],["Terminal","›_"],["Visual Studio Code","⌘"],["Adobe Photoshop","Ps"],
+ ["Notepad","▤"],["Paint","◉"],["Terminal","›_"],["Visual Studio Code","⌘"],["Adobe Photoshop","Ps"],
  ["Spotify","◖"],["Discord","◉"],["Figma","◈"],["CapCut","⌁"],["Blender","♧"],["DaVinci Resolve","◉"],
  ["Word","W"],["Excel","X"],["PowerPoint","P"],["OneNote","N"],["Outlook","O"],["Teams","T"],
  ["Chrome","◉"],["WhatsApp","◔"],["Telegram","➤"],["Steam","◉"],["Epic Games","E"],["GeForce Experience","NVIDIA"]
@@ -11,7 +11,7 @@ const appNames = [
 const appGlyphs = {"Edge":"e","Mail":"✉","Calendar":"▦","Photos":"▧","Settings":"⚙","Calculator":"⌗","Notepad":"▤","Paint":"◉","File Explorer":"▰","Terminal":"›_","Visual Studio Code":"⌘","Adobe Photoshop":"Ps","Spotify":"◖","Discord":"◉","Figma":"◈","CapCut":"⌁","Blender":"♧","DaVinci Resolve":"◉","Word":"W","Excel":"X","PowerPoint":"P","OneNote":"N","Outlook":"O","Teams":"T","Chrome":"◉","WhatsApp":"◔","Telegram":"➤","Steam":"◉","Epic Games":"E","GeForce Experience":"N"};
 const appIcons = {
  "Edge":"microsoft-edge","Mail":"mail","Calendar":"calendar","Photos":"photos","Settings":"settings","Calculator":"calculator",
- "Notepad":"notepad","Paint":"paint","File Explorer":"file-explorer","Terminal":"console","Visual Studio Code":"visual-studio-code-2019","Adobe Photoshop":"adobe-photoshop",
+ "Notepad":"notepad","Paint":"ms-paint","Terminal":"console","Visual Studio Code":"visual-studio-code-2019","Adobe Photoshop":"adobe-photoshop",
  "Spotify":"spotify","Discord":"discord","Figma":"figma","CapCut":"capcut","Blender":"blender-3d","DaVinci Resolve":"davinci-resolve",
  "Word":"microsoft-word-2019","Excel":"microsoft-excel-2019","PowerPoint":"microsoft-powerpoint-2019","OneNote":"microsoft-onenote-2019","Outlook":"microsoft-outlook-2019","Teams":"microsoft-teams-2019",
  "Chrome":"google-chrome","WhatsApp":"whatsapp","Telegram":"telegram-app","Steam":"steam","Epic Games":"epic-games","GeForce Experience":"nvidia"
@@ -21,7 +21,8 @@ if(appGrid){
  appNames.forEach(([name,glyph])=>{
   const b=document.createElement("button"); b.className="app-item"; b.dataset.open=name;
   const icon=document.createElement("img"); icon.className="app-icon"; icon.alt=""; icon.loading="lazy";
-  icon.src="https://img.icons8.com/fluency/48/"+(appIcons[name]||"application-window")+".png";
+  const remoteIcons={"Edge":"https://img.icons8.com/fluency/96/microsoft-edge.png","Chrome":"https://img.icons8.com/fluency/96/google-chrome.png","DaVinci Resolve":"https://img.icons8.com/fluency/96/davinci-resolve.png","Paint":"https://img.icons8.com/fluency/96/ms-paint.png"};
+  icon.src=remoteIcons[name]||("https://img.icons8.com/fluency/96/"+(appIcons[name]||"application-window")+".png");
   icon.onerror=()=>{const fallback=document.createElement("span");fallback.className="app-icon app-icon-fallback";fallback.textContent=glyph;icon.replaceWith(fallback)};
   const label=document.createElement("span");label.textContent=name;b.append(icon,label);appGrid.appendChild(b);
  });
