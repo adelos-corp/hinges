@@ -70,3 +70,19 @@
 
 /* Use the supplied gradient icon files directly; only size them for the desktop. */
 .desktop-svg{object-fit:contain;filter:none}
+
+/* Taskbar-only refinement: slightly smaller overall; leave other desktop surfaces untouched. */
+.taskbar{height:54px;padding-left:18px;padding-right:18px}
+.taskbar-center{gap:0}
+.taskbar-button{width:45px;height:42px;border-radius:9px}
+.start-trigger img{width:28px;height:28px}
+.workspace-mark{width:24px;height:24px;display:block;transform:none}
+.workspace-mark path{vector-effect:non-scaling-stroke}
+.edge-logo,.store-logo{width:27px;height:27px;object-fit:contain;display:block}
+.store-logo{width:27px;height:27px}
+@media(max-width:760px){
+ .taskbar{height:49px;padding-left:7px;padding-right:7px}
+ .taskbar-button{width:35px;height:36px}
+ .start-trigger img{width:25px;height:25px}
+ .edge-logo,.store-logo{width:24px;height:24px}
+}
