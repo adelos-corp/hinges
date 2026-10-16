@@ -54,3 +54,16 @@
   transform:translateZ(0);
   backface-visibility:hidden;
 }
+
+/* Desktop icons: fuller, softer silhouettes; artwork is CSS/SVG only. */
+.desktop-icon{width:54px;min-height:72px;border-radius:14px;gap:5px;padding:5px 3px;transition:background .16s,transform .16s}
+.desktop-icon:hover{background:#ffffff24;transform:translateY(-1px)}
+.desktop-svg{width:34px;height:34px;filter:drop-shadow(0 2px 3px #6b5b7c30)}
+.home-svg{width:34px;height:34px}
+.bin-svg{width:33px;height:34px}
+.desktop-icon small{font-size:12px;font-weight:500;letter-spacing:.01em}
+@media(max-width:760px){
+ .desktop-icon{width:50px;min-height:67px}
+ .desktop-svg,.home-svg{width:31px;height:31px}
+ .bin-svg{width:30px;height:32px}
+}
