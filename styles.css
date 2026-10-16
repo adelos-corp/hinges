@@ -40,3 +40,7 @@
 /* Battery icon size adjustment only */
 .battery-icon{width:30px;max-height:20px}
 @media(max-width:760px){.battery-icon{width:26px;max-height:18px}}
+
+/* Battery icon size adjustment only */
+.battery-icon{width:50px;max-height:32px}
+@media(max-width:760px){.battery-icon{width:44px;max-height:29px}}
