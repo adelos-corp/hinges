@@ -63,7 +63,7 @@
   <nav class="taskbar" aria-label="Taskbar">
     <button class="weather-widget" id="weatherButton" title="Weather"><span class="weather-sun">☀</span><span class="weather-cloud">☁</span><span>28°</span></button>
     <div class="taskbar-center">
-      <button class="taskbar-button start-trigger" id="startButton" aria-label="Start menu" title="Start"><img src="Windows12_Gradient_Transparent.png" alt=""></button>
+      <button class="taskbar-button start-trigger" id="startButton" aria-label="Start menu" title="Start" aria-controls="startMenu" aria-expanded="false" onclick="(function(b){const m=document.getElementById('startMenu');if(!m)return;const opening=m.classList.contains('hidden');document.querySelectorAll('#rightPanel,#workspaces,#powerDialog').forEach(p=>p.classList.add('hidden'));m.classList.toggle('hidden',!opening);b.setAttribute('aria-expanded',String(opening));if(opening){const i=document.getElementById('commandInput');if(i)i.focus()}})(this)"><img src="Windows12_Gradient_Transparent.png" alt=""></button>
       <button class="taskbar-button" id="workspacesButton" aria-label="Workspaces" title="Workspaces"><img class="workspace-mark task-view-icon" src="icons8-task-view-48.png" alt=""></button>
       <button class="taskbar-button app-shortcut" data-open="Edge" title="Edge"><img class="edge-logo" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Microsoft%20Edge%20logo%20%282019%29.svg" alt=""></button>
       <button class="taskbar-button app-shortcut store-mark" data-open="Store" title="Store"><img class="store-logo" src="icons8-microsoft-store-48.png" alt=""></button>
