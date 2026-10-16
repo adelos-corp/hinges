@@ -1,25 +1,6 @@
 const $ = (s, root=document) => root.querySelector(s);
 const $ = (s, root=document) => [...root.querySelectorAll(s)];
 
-// Early, capture-phase Start handler so the menu still opens even if a later
-// prototype widget encounters an unrelated initialization error.
-document.addEventListener("click", e => {
- const trigger = e.target.closest("#startButton");
- if (!trigger) return;
- e.preventDefault();
- e.stopImmediatePropagation();
- const menu = document.querySelector("#startMenu");
- if (!menu) return;
- const opening = menu.classList.contains("hidden");
- document.querySelectorAll("#rightPanel,#workspaces,#powerDialog").forEach(panel => panel.classList.add("hidden"));
- menu.classList.toggle("hidden", !opening);
- trigger.setAttribute("aria-controls", "startMenu");
- trigger.setAttribute("aria-expanded", String(opening));
- if (opening) {
-   const input = document.querySelector("#commandInput");
-   if (input) setTimeout(() => input.focus(), 50);
- }
-}, true);
 const appNames = [
  ["Edge","e"],["Mail","✉"],["Calendar","▦"],["Photos","▧"],["Settings","⚙"],["Calculator","⌗"],
  ["Notepad","▤"],["Paint","◉"],["File Explorer","▰"],["Terminal","›_"],["Visual Studio Code","⌘"],["Adobe Photoshop","Ps"],
@@ -47,10 +28,11 @@ function togglePanel(){const el=$("#rightPanel");if(!el.classList.contains("hidd
 function toggleWorkspaces(){const el=$("#workspaces");if(!el.classList.contains("hidden")){hide(el);return}closeOverlays("workspaces");show(el);renderWorkspaces()}
 function updateDateTime(){
  const now=new Date();
- $("#clockTime").textContent=now.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"});
- $("#clockDate").textContent=now.toLocaleDateString([], {day:"2-digit",month:"2-digit",year:"numeric"});
- $("#dateDay").textContent=now.toLocaleDateString([], {weekday:"long"}).toUpperCase();
- $("#dateFull").textContent=now.toLocaleDateString([], {day:"numeric",month:"long",year:"numeric"});
+ const zone="Asia/Kolkata";
+ $("#clockTime").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,hour:"numeric",minute:"2-digit",hour12:true}).format(now)+" IST";
+ $("#clockDate").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,day:"2-digit",month:"2-digit",year:"numeric"}).format(now);
+ $("#dateDay").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,weekday:"long"}).format(now).toUpperCase();
+ $("#dateFull").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,day:"numeric",month:"long",year:"numeric"}).format(now);
 }
 updateDateTime();setInterval(updateDateTime,15000);
 function renderStates(){
@@ -136,17 +118,6 @@ function renderWorkspaces(){
  wins.forEach(w=>{const b=document.createElement("button");b.className="workspace-card";b.draggable=true;b.innerHTML='<div class="window-preview">'+(appGlyphs[w.name]||"◇")+'</div><strong>'+w.name+(w.minimized?" · Minimized":"")+'</strong>';b.addEventListener("click",()=>{if(w.minimized){w.minimized=false;w.element.classList.remove("hidden")}hide($("#workspaces"));w.element.style.zIndex=String(30+Date.now()%1000)});b.addEventListener("dragstart",e=>e.dataTransfer.setData("text/plain",String(w.id)));b.addEventListener("dragover",e=>e.preventDefault());b.addEventListener("drop",e=>{e.preventDefault();const id=Number(e.dataTransfer.getData("text/plain"));const moving=openWindows.find(x=>x.id===id);if(moving){moving.space=activeSpace;renderWorkspaces();toast(moving.name+" moved to Desktop "+activeSpace)}});canvas.appendChild(b)});
 }
 $("[data-close=workspaces]").forEach(b=>b.addEventListener("click",()=>hide($("#workspaces"))));
-const startButton = $("#startButton");
-const startMenu = $("#startMenu");
-if(startButton && startMenu){
- startButton.setAttribute("aria-controls","startMenu");
- startButton.setAttribute("aria-expanded",String(!startMenu.classList.contains("hidden")));
- startButton.addEventListener("click",e=>{
-  e.preventDefault();
-  toggleStart();
-  startButton.setAttribute("aria-expanded",String(!startMenu.classList.contains("hidden")));
- });
-}
 $("#workspacesButton").addEventListener("click",toggleWorkspaces);
 $("#trayChevron").addEventListener("click",togglePanel);
 $("#clockButton").addEventListener("click",togglePanel);
