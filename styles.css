@@ -178,3 +178,36 @@ button:focus-visible,input:focus-visible{
   .app-item span:last-child{font-size:10px}
   .start-footer{height:54px}
 }
+
+
+/* Start menu: broader, lighter acrylic and proper image-based app logos. */
+.start-menu{
+ width:min(790px,calc(100vw - 32px));
+ background:rgba(248,242,255,.57);
+ border-color:rgba(255,255,255,.7);
+ -webkit-backdrop-filter:blur(42px) saturate(1.25);
+ backdrop-filter:blur(42px) saturate(1.25);
+}
+.app-grid{grid-template-columns:repeat(6,minmax(0,1fr));}
+.app-icon{
+ display:block;
+ width:38px;
+ height:38px;
+ object-fit:contain;
+ background:transparent!important;
+ border-radius:0;
+ color:inherit;
+}
+.app-icon-fallback{
+ display:grid;
+ place-items:center;
+ border-radius:9px;
+ background:linear-gradient(145deg,#78c7ed,#4266d9)!important;
+ color:white;
+ font-size:22px;
+ font-weight:650;
+}
+@media(max-width:760px){
+ .start-menu{width:calc(100vw - 20px)}
+ .app-icon{width:32px;height:32px}
+}
