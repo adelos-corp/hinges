@@ -86,3 +86,21 @@
  .start-trigger img{width:25px;height:25px}
  .edge-logo,.store-logo{width:24px;height:24px}
 }
+
+
+/* Remove visual hover/focus highlight boxes across the interface. */
+.taskbar-button:hover,.taskbar-button:focus-visible,
+.chevron-button:hover,.desktop-icon:hover,.app-item:hover,
+.mini-control:hover,.media-card button:hover,.utility-row button:hover,
+.workspace-card:hover,.power-dialog button:hover{
+  outline:none!important;
+  box-shadow:none;
+  border-color:transparent;
+  background-color:transparent;
+}
+button:hover,input:hover,textarea:hover,select:hover,[role="button"]:hover{
+  outline:none;
+}
+button:focus-visible,input:focus-visible{
+  outline:none;
+}
