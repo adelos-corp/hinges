@@ -116,7 +116,17 @@ function renderWorkspaces(){
  wins.forEach(w=>{const b=document.createElement("button");b.className="workspace-card";b.draggable=true;b.innerHTML='<div class="window-preview">'+(appGlyphs[w.name]||"◇")+'</div><strong>'+w.name+(w.minimized?" · Minimized":"")+'</strong>';b.addEventListener("click",()=>{if(w.minimized){w.minimized=false;w.element.classList.remove("hidden")}hide($("#workspaces"));w.element.style.zIndex=String(30+Date.now()%1000)});b.addEventListener("dragstart",e=>e.dataTransfer.setData("text/plain",String(w.id)));b.addEventListener("dragover",e=>e.preventDefault());b.addEventListener("drop",e=>{e.preventDefault();const id=Number(e.dataTransfer.getData("text/plain"));const moving=openWindows.find(x=>x.id===id);if(moving){moving.space=activeSpace;renderWorkspaces();toast(moving.name+" moved to Desktop "+activeSpace)}});canvas.appendChild(b)});
 }
 $("[data-close=workspaces]").forEach(b=>b.addEventListener("click",()=>hide($("#workspaces"))));
-$("#startButton").addEventListener("click",toggleStart);
+const startButton = $("#startButton");
+const startMenu = $("#startMenu");
+if(startButton && startMenu){
+ startButton.setAttribute("aria-controls","startMenu");
+ startButton.setAttribute("aria-expanded",String(!startMenu.classList.contains("hidden")));
+ startButton.addEventListener("click",e=>{
+  e.preventDefault();
+  toggleStart();
+  startButton.setAttribute("aria-expanded",String(!startMenu.classList.contains("hidden")));
+ });
+}
 $("#workspacesButton").addEventListener("click",toggleWorkspaces);
 $("#trayChevron").addEventListener("click",togglePanel);
 $("#clockButton").addEventListener("click",togglePanel);
