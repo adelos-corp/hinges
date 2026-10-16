@@ -21,7 +21,7 @@ if(appGrid){
  appNames.forEach(([name,glyph])=>{
   const b=document.createElement("button"); b.className="app-item"; b.dataset.open=name;
   const icon=document.createElement("img"); icon.className="app-icon"; icon.alt=""; icon.loading="lazy";
-  const remoteIcons={"Edge":"https://img.icons8.com/fluency/96/microsoft-edge.png","Chrome":"https://img.icons8.com/fluency/96/google-chrome.png","DaVinci Resolve":"https://img.icons8.com/fluency/96/davinci-resolve.png","Paint":"https://img.icons8.com/fluency/96/ms-paint.png"};
+  const remoteIcons={"Edge":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Microsoft%20Edge%20logo%20%282019%29.svg","Chrome":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Google%20Chrome%20icon%20%28February%202022%29.svg","DaVinci Resolve":"https://commons.wikimedia.org/wiki/Special:Redirect/file/DaVinci_Resolve_17_logo.svg","Paint":"https://commons.wikimedia.org/wiki/Special:Redirect/file/Microsoft_Paint.svg"};
   icon.src=remoteIcons[name]||("https://img.icons8.com/fluency/96/"+(appIcons[name]||"application-window")+".png");
   icon.onerror=()=>{const fallback=document.createElement("span");fallback.className="app-icon app-icon-fallback";fallback.textContent=glyph;icon.replaceWith(fallback)};
   const label=document.createElement("span");label.textContent=name;b.append(icon,label);appGrid.appendChild(b);
