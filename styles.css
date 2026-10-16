@@ -216,7 +216,7 @@ button:focus-visible,input:focus-visible{
 /* Start menu final tuning: slightly wider, with more wallpaper visible through the acrylic. */
 .start-menu{
   width:min(830px,calc(100vw - 32px));
-  background:rgba(248,242,255,.36);
+  background:rgba(248,242,255,.22);
   border-color:rgba(255,255,255,.76);
   -webkit-backdrop-filter:blur(38px) saturate(1.2);
   backdrop-filter:blur(38px) saturate(1.2);
