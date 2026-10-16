@@ -44,7 +44,6 @@ function toggleState(key){
  if(key==="night")$("#desktop").classList.toggle("night-mode",states.night);
  $("#appGrid").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(b)openApp(b.dataset.open)});
 $(".desktop-icons [data-open],.taskbar [data-open]").forEach(b=>b.addEventListener("click",()=>openApp(b.dataset.open)));
-$("#binIcon").addEventListener("dblclick",()=>openApp("Bin"));
 renderStates();
  const labels={wifi:"Wi-Fi",bluetooth:"Bluetooth",airplane:"Airplane mode",battery:"Battery saver",night:"Night light",focus:"Focus mode",keyboard:"Keyboard",sound:"Sound"};
  toast((labels[key]||key)+" "+(states[key]?"turned on":"turned off"));
@@ -118,6 +117,7 @@ function renderWorkspaces(){
 }
 $("[data-close=workspaces]").forEach(b=>b.addEventListener("click",()=>hide($("#workspaces"))));
 $("#startButton").addEventListener("click",toggleStart);
+$("#searchButton").addEventListener("click",()=>{const menu=$("#startMenu");if(menu.classList.contains("hidden")){closeOverlays("start");show(menu)}setTimeout(()=>$("#commandInput").focus(),20)});
 $("#workspacesButton").addEventListener("click",toggleWorkspaces);
 $("#trayChevron").addEventListener("click",togglePanel);
 $("#clockButton").addEventListener("click",togglePanel);
