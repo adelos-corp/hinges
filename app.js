@@ -117,7 +117,6 @@ function renderWorkspaces(){
 }
 $("[data-close=workspaces]").forEach(b=>b.addEventListener("click",()=>hide($("#workspaces"))));
 $("#startButton").addEventListener("click",toggleStart);
-$("#searchButton").addEventListener("click",()=>{const menu=$("#startMenu");if(menu.classList.contains("hidden")){closeOverlays("start");show(menu)}setTimeout(()=>$("#commandInput").focus(),20)});
 $("#workspacesButton").addEventListener("click",toggleWorkspaces);
 $("#trayChevron").addEventListener("click",togglePanel);
 $("#clockButton").addEventListener("click",togglePanel);
