@@ -67,3 +67,6 @@
  .desktop-svg,.home-svg{width:31px;height:31px}
  .bin-svg{width:30px;height:32px}
 }
+
+/* Use the supplied gradient icon files directly; only size them for the desktop. */
+.desktop-svg{object-fit:contain;filter:none}
