@@ -16,13 +16,6 @@ const appIcons = {
  "Word":"microsoft-word-2019","Excel":"microsoft-excel-2019","PowerPoint":"microsoft-powerpoint-2019","OneNote":"microsoft-onenote-2019","Outlook":"microsoft-outlook-2019","Teams":"microsoft-teams-2019",
  "Chrome":"google-chrome","WhatsApp":"whatsapp","Telegram":"telegram-app","Steam":"steam","Epic Games":"epic-games","GeForce Experience":"nvidia"
 };
-const appIcons = {
- "Edge":"microsoft-edge","Mail":"mail","Calendar":"calendar","Photos":"photos","Settings":"settings","Calculator":"calculator",
- "Notepad":"notepad","Paint":"paint","File Explorer":"file-explorer","Terminal":"console","Visual Studio Code":"visual-studio-code-2019","Adobe Photoshop":"adobe-photoshop",
- "Spotify":"spotify","Discord":"discord","Figma":"figma","CapCut":"capcut","Blender":"blender-3d","DaVinci Resolve":"davinci-resolve",
- "Word":"microsoft-word-2019","Excel":"microsoft-excel-2019","PowerPoint":"microsoft-powerpoint-2019","OneNote":"microsoft-onenote-2019","Outlook":"microsoft-outlook-2019","Teams":"microsoft-teams-2019",
- "Chrome":"google-chrome","WhatsApp":"whatsapp","Telegram":"telegram-app","Steam":"steam","Epic Games":"epic-games","GeForce Experience":"nvidia"
-};
 const appGrid = $("#appGrid");
 if(appGrid){
  appNames.forEach(([name,glyph])=>{
