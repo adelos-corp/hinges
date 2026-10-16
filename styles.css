@@ -249,3 +249,61 @@ button:focus-visible,input:focus-visible{
 .start-footer{
   border-top-color:rgba(255,255,255,.48);
 }
+
+
+/* Stronger glossy acrylic: a visible reflected highlight across the upper glass. */
+.start-menu{
+  position:absolute;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    linear-gradient(118deg,
+      rgba(255,255,255,.48) 0%,
+      rgba(255,255,255,.20) 12%,
+      rgba(255,255,255,.045) 31%,
+      rgba(255,255,255,.015) 56%,
+      rgba(225,233,255,.12) 100%),
+    linear-gradient(180deg,rgba(255,255,255,.15),rgba(239,228,255,.035));
+  border-color:rgba(255,255,255,.82);
+  box-shadow:
+    0 28px 78px rgba(37,22,69,.22),
+    inset 0 2px 0 rgba(255,255,255,.96),
+    inset 0 0 0 1px rgba(255,255,255,.20),
+    inset 1px 0 0 rgba(255,255,255,.50),
+    inset -1px 0 0 rgba(255,255,255,.34),
+    inset 0 -2px 0 rgba(255,255,255,.38);
+  -webkit-backdrop-filter:blur(26px) saturate(1.85) brightness(1.10);
+  backdrop-filter:blur(26px) saturate(1.85) brightness(1.10);
+}
+.start-menu::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  pointer-events:none;
+  left:-12%;
+  top:-38%;
+  width:124%;
+  height:57%;
+  border-radius:50%;
+  background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.12) 38%,rgba(255,255,255,0));
+  filter:blur(7px);
+  transform:rotate(-5deg);
+}
+.start-menu::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  pointer-events:none;
+  inset:1px;
+  border-radius:inherit;
+  background:linear-gradient(145deg,rgba(255,255,255,.10),transparent 28%,transparent 76%,rgba(255,255,255,.06));
+}
+.command-form,.app-grid,.start-footer{
+  position:relative;
+  z-index:1;
+}
+.command-form input{
+  background:linear-gradient(180deg,rgba(255,255,255,.60),rgba(255,255,255,.18));
+  border-color:rgba(255,255,255,.86);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.96),inset 0 -1px 0 rgba(255,255,255,.16),0 2px 6px rgba(62,39,91,.06);
+}
