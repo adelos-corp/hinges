@@ -351,3 +351,9 @@ button:focus-visible,input:focus-visible{
 #rightPanel{top:56px;bottom:auto;max-height:calc(100vh - 72px)}
 #startMenu{bottom:72px}
 @media(max-width:640px){.topbar{padding:0 9px}.topbar-left,.topbar-right{gap:5px}.current-app{max-width:88px}.background-apps{gap:2px}.background-app{width:22px;height:22px}.topbar .clock-button{min-width:53px;padding:2px}.topbar .clock-button strong{font-size:11px}.topbar .clock-button small{font-size:9px}.system-name{font-size:10px;letter-spacing:.08em}}
+
+/* Nordy menu bar: native macOS-style spacing, with no separator after the system name. */
+.system-name{font-size:17px;font-weight:750;letter-spacing:-.025em;text-transform:none;padding:5px 0}
+.topbar-left{gap:20px}
+.topbar-divider{display:none}
+.current-app{font-size:16px;font-weight:550;max-width:220px}
