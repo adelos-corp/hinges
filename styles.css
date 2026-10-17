@@ -322,3 +322,32 @@ button:focus-visible,input:focus-visible{
   .app-icon{width:39px;height:39px}
   .app-item{min-height:79px}
 }
+
+
+/* Hinges floating system bars: no taskbar slab or dock container. */
+.topbar{position:absolute;z-index:12;top:0;left:0;right:0;height:48px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 18px;color:#fff;text-shadow:0 1px 5px #32283e90;pointer-events:none}
+.topbar button{pointer-events:auto}
+.topbar-left,.topbar-right{display:flex;align-items:center;min-width:0;gap:11px}
+.topbar-left{justify-self:start}
+.topbar-right{justify-self:end}
+.system-name{border:0;background:transparent;color:inherit;font-size:11px;font-weight:850;letter-spacing:.15em;padding:7px 0}
+.topbar-divider{height:15px;width:1px;background:#ffffff70}
+.current-app{font-size:12px;font-weight:550;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
+.topbar-icon{position:relative;width:32px;height:32px;display:grid;place-items:center;border:0;border-radius:10px;background:transparent;color:inherit;font-size:19px;transition:background .16s}
+.topbar-icon:hover,.topbar-icon:focus-visible{background:#ffffff32}
+.notification-trigger{margin-left:3px}
+.notification-dot{position:absolute;top:6px;right:6px;width:5px;height:5px;border-radius:50%;background:#caa7ff;box-shadow:0 0 0 1px #ffffff80}
+.control-trigger{justify-self:center;font-size:22px}
+.background-apps{display:flex;align-items:center;gap:7px}
+.background-app{width:25px;height:25px;padding:3px;border:0;border-radius:7px;background:transparent;display:grid;place-items:center}
+.background-app:hover{background:#ffffff32}
+.background-app img{width:19px;height:19px;object-fit:contain}
+.background-app span{font-size:13px;font-weight:750}
+.topbar .clock-button{color:inherit;min-width:65px}
+.taskbar{position:absolute;left:0;right:0;bottom:0;height:64px;display:flex;align-items:center;justify-content:center;padding:0 16px;background:transparent;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;z-index:10;pointer-events:none}
+.taskbar-center{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);display:flex;align-items:center;gap:7px;padding:0;background:transparent;border:0;box-shadow:none;pointer-events:auto}
+.taskbar-button{width:43px;height:43px;border:1px solid transparent;border-radius:12px;background:transparent;display:grid;place-items:center;transition:background .18s,transform .18s}
+.taskbar-button:hover,.taskbar-button:focus-visible{background:#ffffff35;transform:translateY(-3px)}
+#rightPanel{top:56px;bottom:auto;max-height:calc(100vh - 72px)}
+#startMenu{bottom:72px}
+@media(max-width:640px){.topbar{padding:0 9px}.topbar-left,.topbar-right{gap:5px}.current-app{max-width:88px}.background-apps{gap:2px}.background-app{width:22px;height:22px}.topbar .clock-button{min-width:53px;padding:2px}.topbar .clock-button strong{font-size:11px}.topbar .clock-button small{font-size:9px}.system-name{font-size:10px;letter-spacing:.08em}}
