@@ -95,6 +95,7 @@ function openApp(name){
  card.innerHTML='<header class="window-titlebar"><span class="window-app-dot"></span><strong>'+name+'</strong><button data-minimize="'+id+'" title="Minimize">−</button><button data-maximize="'+id+'" title="Maximize">□</button><button data-close-window="'+id+'" title="Close">×</button></header><div class="window-content">'+windowMarkup(name,id)+'</div>';
  $("#windowLayer").appendChild(card);
  openWindows.push({id,name,space:activeSpace,element:card,minimized:false,maximized:false});
+ renderTopBar();
  makeDraggable(card);bindWindow(card);renderWorkspaces();toast(name+" opened");
 }
 function makeDraggable(card){
@@ -105,7 +106,7 @@ function makeDraggable(card){
 }
 function bindWindow(card){
  const id=Number(card.dataset.windowId);
- $$("[data-close-window]",card).forEach(b=>b.addEventListener("click",()=>{card.remove();const i=openWindows.findIndex(w=>w.id===id);if(i>=0)openWindows.splice(i,1);renderWorkspaces()}));
+ $$("[data-close-window]",card).forEach(b=>b.addEventListener("click",()=>{card.remove();const i=openWindows.findIndex(w=>w.id===id);if(i>=0)openWindows.splice(i,1);renderWorkspaces();renderTopBar()}));
  $$("[data-minimize]",card).forEach(b=>b.addEventListener("click",()=>{card.classList.add("hidden");const w=openWindows.find(x=>x.id===id);if(w)w.minimized=true;renderWorkspaces()}));
  $$("[data-maximize]",card).forEach(b=>b.addEventListener("click",()=>{const w=openWindows.find(x=>x.id===id);if(!w)return;if(w.maximized){card.style.left="";card.style.top="";card.style.width="";card.style.height="";card.style.transform="translate(-50%,-50%)";w.maximized=false}else{card.style.left="12px";card.style.top="12px";card.style.width="calc(100vw - 24px)";card.style.height="calc(100vh - 82px)";card.style.transform="none";w.maximized=true}}));
  $$("[data-calc]",card).forEach(b=>b.addEventListener("click",()=>calcPress(card,b.dataset.calc)));
@@ -121,6 +122,7 @@ function escapeHTML(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">
 let calcExpression="";
 function calcPress(card,key){const display=$("#calcDisplay",card);if(key==="="){try{if(!/^[0-9+\-*/(). ×÷]+$/.test(calcExpression))throw Error();const safe=calcExpression.replaceAll("×","*").replaceAll("÷","/");const value=Function('"use strict";return ('+safe+')')();calcExpression=String(value);display.value=calcExpression}catch{display.value="Error";calcExpression=""}}else{calcExpression+=key;display.value=calcExpression||"0"}}
 function renderWorkspaces(){
+ renderTopBar();
  const tabs=$("#spaceTabs");tabs.innerHTML="";
  for(let i=1;i<=spaces;i++){const b=document.createElement("button");b.className="space-tab"+(i===activeSpace?" active":"");b.dataset.space=i;b.textContent="Desktop "+i;b.addEventListener("click",()=>{activeSpace=i;renderWorkspaces();openWindows.forEach(w=>{w.element.classList.toggle("hidden",w.space!==activeSpace||w.minimized)})});b.addEventListener("dragover",e=>e.preventDefault());b.addEventListener("drop",e=>{e.preventDefault();const moving=openWindows.find(x=>x.id===Number(e.dataTransfer.getData("text/plain")));if(moving){moving.space=i;activeSpace=i;renderWorkspaces();openWindows.forEach(w=>w.element.classList.toggle("hidden",w.space!==activeSpace||w.minimized));toast(moving.name+" moved to Desktop "+i)}});tabs.appendChild(b)}
  const add=document.createElement("button");add.className="add-space";add.textContent="＋";add.title="Add desktop";add.addEventListener("click",()=>{spaces++;activeSpace=spaces;renderWorkspaces();openWindows.forEach(w=>w.element.classList.toggle("hidden",w.space!==activeSpace||w.minimized));toast("Desktop "+spaces+" created")});tabs.appendChild(add);
@@ -169,3 +171,24 @@ document.addEventListener("click",e=>{
  if(!e.target.closest("#startMenu,#startButton,#rightPanel,#trayChevron,#clockButton,#workspaces,#workspacesButton,#powerDialog")&&!e.target.closest(".window-card")){hide($("#startMenu"));hide($("#powerDialog"))}
 });
 renderStates();
+
+
+// Floating top-bar interactions and live app indicators.
+function renderTopBar(){
+ const active = [...openWindows].reverse().find(w=>!w.minimized&&w.space===activeSpace);
+ const current = $("#currentApp");
+ if(current)current.textContent=active?active.name:"Desktop";
+ const apps=$("#backgroundApps");
+ if(!apps)return;
+ apps.innerHTML="";
+ openWindows.filter(w=>w.space===activeSpace).slice(-5).forEach(w=>{
+  const b=document.createElement("button");b.className="background-app";b.title=w.name;b.setAttribute("aria-label",w.name);
+  const glyph=appGlyphs[w.name]||"◇";
+  b.innerHTML='<span>'+escapeHTML(glyph)+'</span>';
+  b.addEventListener("click",()=>{if(w.minimized){w.minimized=false;w.element.classList.remove("hidden")}w.element.style.zIndex=String(30+Date.now()%1000)});
+  apps.appendChild(b);
+ });
+}
+$("#notificationsButton").addEventListener("click",togglePanel);
+$("#controlCentreButton").addEventListener("click",togglePanel);
+$("#systemName").addEventListener("click",()=>{if(!$("#startMenu").classList.contains("hidden"))hide($("#startMenu"));else toggleStart()});
