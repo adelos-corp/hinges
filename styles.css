@@ -383,3 +383,12 @@ button:focus-visible,input:focus-visible{
 
 /* Remove the top inset: align the menu bar flush with the top edge. */
 .topbar{top:0;padding-top:0;margin-top:0;transform:translateY(-11px)}
+
+/* Reduce menu-bar typography by roughly 30%, preserving icon and battery sizing. */
+.topbar .system-name{font-size:12px}
+.topbar .current-app{font-size:11px}
+.topbar .topbar-icon{font-size:14px}
+.topbar .control-trigger{font-size:16px}
+.topbar .clock-button strong{font-size:11px}
+.topbar .clock-button small{font-size:8px}
+.topbar .background-app span{font-size:9px}
