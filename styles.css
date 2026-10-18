@@ -366,3 +366,6 @@ button:focus-visible,input:focus-visible{
 /* Menu-bar battery: larger and aligned to the same visual centre as the clock and tray. */
 .topbar-right{align-items:center}
 .battery-status{width:29px;height:19px;object-fit:contain;display:block;align-self:center;flex:0 0 auto;opacity:1}
+
+/* Prominent menu-bar battery glyph, sized to match the visual weight of the system icons. */
+.battery-status{width:40px;height:25px;min-width:40px;object-fit:contain;display:block;align-self:center;flex:0 0 40px;opacity:1}
