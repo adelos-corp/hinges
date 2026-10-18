@@ -392,3 +392,7 @@ button:focus-visible,input:focus-visible{
 .topbar .clock-button strong{font-size:11px}
 .topbar .clock-button small{font-size:8px}
 .topbar .background-app span{font-size:9px}
+
+/* Hide the system-name label while retaining its harmless Start-menu binding. */
+.topbar .system-name{display:none}
+.topbar-left{gap:10px}
