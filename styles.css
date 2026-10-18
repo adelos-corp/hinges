@@ -382,4 +382,4 @@ button:focus-visible,input:focus-visible{
 .topbar-right .battery-status{transform:translateX(5px);margin-right:-10px}
 
 /* Remove the top inset: align the menu bar flush with the top edge. */
-.topbar{top:0;padding-top:0;margin-top:0;transform:translateY(-14px)}
+.topbar{top:0;padding-top:0;margin-top:0;transform:translateY(-11px)}
