@@ -377,3 +377,6 @@ button:focus-visible,input:focus-visible{
 /* Keep the battery immediately beside the clock. */
 .topbar-right{gap:2px}
 .battery-status{margin-right:-5px}
+
+/* Pull the battery artwork right up against the clock; account for transparent padding inside the PNG. */
+.topbar-right .battery-status{transform:translateX(14px);margin-right:-19px}
