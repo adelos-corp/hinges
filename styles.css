@@ -373,3 +373,7 @@ button:focus-visible,input:focus-visible{
 /* Battery sits close to the clock and has a stronger visual presence. */
 .topbar-right{gap:5px}
 .battery-status{width:50px;height:30px;min-width:50px;flex-basis:50px;margin-right:-2px}
+
+/* Keep the battery immediately beside the clock. */
+.topbar-right{gap:2px}
+.battery-status{margin-right:-5px}
