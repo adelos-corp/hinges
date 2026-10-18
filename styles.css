@@ -362,3 +362,7 @@ button:focus-visible,input:focus-visible{
 .desktop-icons{top:62px}
 .topbar-right{gap:11px}
 .battery-status{width:23px;height:15px;display:block;object-fit:contain;opacity:.96}
+
+/* Menu-bar battery: larger and aligned to the same visual centre as the clock and tray. */
+.topbar-right{align-items:center}
+.battery-status{width:29px;height:19px;object-fit:contain;display:block;align-self:center;flex:0 0 auto;opacity:1}
