@@ -357,3 +357,8 @@ button:focus-visible,input:focus-visible{
 .topbar-left{gap:20px}
 .topbar-divider{display:none}
 .current-app{font-size:16px;font-weight:550;max-width:220px}
+
+/* Keep desktop shortcuts clear of the menu bar and use the system's battery indicator. */
+.desktop-icons{top:62px}
+.topbar-right{gap:11px}
+.battery-status{width:23px;height:15px;display:block;object-fit:contain;opacity:.96}
