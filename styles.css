@@ -2067,3 +2067,27 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
   }
   #desktop:not(.is-unlocking) #lockScreen:not(.is-leaving){background:transparent!important}
 }
+
+
+/* Compact Control Centre glyph; keep the full-size hit target. */
+#desktop > header.topbar #controlCentreButton{
+  position:relative!important;
+  width:44px!important;
+  min-width:44px!important;
+  height:44px!important;
+}
+#desktop > header.topbar .control-centre-icon{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:14px!important;
+  height:14px!important;
+  min-width:14px!important;
+  min-height:14px!important;
+  max-width:14px!important;
+  max-height:14px!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:contain!important;
+  transform:translate(-50%,-50%)!important;
+}
