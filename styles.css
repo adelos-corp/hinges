@@ -485,3 +485,41 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{
     transition-duration:.01ms!important;
   }
 }
+
+
+/* Wallpaper-first lock screen: the desktop remains mounted beneath this overlay. */
+.lock-screen{position:absolute;inset:0;z-index:100;overflow:hidden;color:#fff;background:#a9a0bb url("Abstract%20Dreamscapes%20(4).png") center/cover no-repeat;isolation:isolate;transition:opacity .48s ease,visibility .48s ease}
+.lock-screen::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(22,17,35,.16) 0%,rgba(28,20,43,.02) 38%,rgba(24,18,38,.3) 100%)}
+.lock-screen.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+.lock-shade{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 34%,transparent 0%,rgba(24,18,38,.08) 58%,rgba(24,18,38,.2) 100%)}
+.lock-topline{position:absolute;top:clamp(24px,4.2vh,44px);left:clamp(24px,4vw,54px);right:clamp(24px,4vw,54px);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.lock-wordmark{font-size:17px;letter-spacing:-.055em;font-weight:650;text-shadow:0 1px 18px #21192d30}
+.lock-wordmark-dot{color:#d8c1ff}
+.lock-edition{font-size:9px;font-weight:750;letter-spacing:.22em;color:#ffffffb8}
+.lock-clock-block{position:absolute;top:29%;left:clamp(28px,8.5vw,132px);transform:translateY(-10%);text-align:left;user-select:none;text-shadow:0 3px 36px #21182f2b}
+.lock-time{display:block;font-size:clamp(84px,13vw,176px);font-weight:300;letter-spacing:-.085em;line-height:.95;font-variant-numeric:tabular-nums}
+.lock-date{margin-top:18px;font-size:clamp(15px,1.8vw,22px);font-weight:450;letter-spacing:-.02em;color:#ffffffed}
+.lock-reveal{position:absolute;left:50%;bottom:clamp(72px,10vh,112px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;background:transparent;border:0;color:#fff;padding:14px 20px;text-shadow:0 1px 12px #21182f55;transition:opacity .2s,transform .2s}
+.lock-reveal:hover{transform:translateX(-50%) translateY(-3px)}
+.lock-reveal-label{font-size:12px;letter-spacing:.035em;color:#ffffffd9}
+.lock-reveal-arrow{display:grid;place-items:center;width:34px;height:34px;border:1px solid #ffffff75;border-radius:50%;background:#ffffff18;backdrop-filter:blur(18px);font-size:22px;line-height:1}
+.lock-bottom{position:absolute;left:clamp(24px,4vw,54px);right:clamp(24px,4vw,54px);bottom:clamp(22px,3.5vh,36px);display:flex;align-items:flex-end;justify-content:space-between}
+.lock-weather{display:flex;align-items:center;gap:10px;color:#fff;text-shadow:0 1px 12px #21182f55}
+.lock-weather>span:first-child{font-size:26px}
+.lock-weather>span:last-child{display:grid;gap:2px}
+.lock-weather strong{font-size:15px;font-weight:650}
+.lock-weather small{font-size:10px;color:#ffffffc9}
+.lock-status{display:flex;align-items:center;gap:16px;font-size:16px;color:#ffffffeb;text-shadow:0 1px 12px #21182f55}
+.lock-signin{position:absolute;top:50%;right:clamp(24px,10vw,150px);transform:translateY(-50%);width:min(330px,calc(100vw - 40px));padding:28px 25px 20px;text-align:center;border:1px solid #ffffffa6;border-radius:25px;background:rgba(248,245,255,.19);box-shadow:0 24px 80px #21172d22;backdrop-filter:blur(38px) saturate(135%);-webkit-backdrop-filter:blur(38px) saturate(135%);animation:lockCardIn .36s cubic-bezier(.2,.8,.2,1) both}
+@keyframes lockCardIn{from{opacity:0;transform:translateY(calc(-50% + 12px)) scale(.98)}to{opacity:1;transform:translateY(-50%) scale(1)}}
+.lock-avatar{width:62px;height:62px;margin:0 auto 16px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(145deg,#ffffffd9,#e5d8ff8c);border:1px solid #ffffffc9;color:#7652c7;font-size:31px;box-shadow:0 8px 24px #30214320}
+.lock-welcome{margin:0;font-size:23px;font-weight:550;letter-spacing:-.04em}
+.lock-subtitle{margin:7px 0 22px;color:#ffffffd9;font-size:12px}
+.lock-continue{width:100%;display:flex;justify-content:space-between;align-items:center;padding:13px 15px;border:1px solid #ffffffd9;border-radius:13px;background:#ffffffdf;color:#322943;font-size:12px;font-weight:650;box-shadow:0 5px 18px #21182f16;transition:transform .18s,background .18s}
+.lock-continue:hover{transform:translateY(-1px);background:#fff}
+.lock-continue span{font-size:16px;color:#7652c7}
+.lock-demo-note{display:block;margin-top:15px;color:#ffffffb8;font-size:9px;line-height:1.5}
+.lock-back{margin-top:12px;padding:7px 10px;background:transparent;border:0;color:#ffffffdc;font-size:10px}
+.lock-back:hover{text-decoration:underline}
+@media(max-width:700px){.lock-clock-block{top:28%;left:28px;right:20px}.lock-time{font-size:clamp(76px,22vw,132px)}.lock-date{margin-top:12px;font-size:15px}.lock-reveal{bottom:95px}.lock-signin{left:50%;right:auto;top:50%;transform:translate(-50%,-50%);width:min(330px,calc(100vw - 36px))}@keyframes lockCardIn{from{opacity:0;transform:translate(-50%,calc(-50% + 12px)) scale(.98)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}.lock-signin.hidden{display:none!important}.lock-edition{font-size:8px}.lock-status{gap:11px}}
+@media(prefers-reduced-motion:reduce){.lock-screen,.lock-reveal,.lock-continue{transition:none}.lock-signin{animation:none}}
