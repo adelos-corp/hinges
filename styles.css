@@ -2378,3 +2378,62 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
     transform:scale(1.08)!important;
   }
 }
+
+
+/* Crop battery2.png's oversized transparent canvas so its white glyph fills the menu-bar slot. */
+#desktop > header.topbar .topbar-right > #menuBarBatteryCrop{
+  position:relative!important;
+  display:block!important;
+  flex:0 0 48px!important;
+  width:48px!important;
+  min-width:48px!important;
+  max-width:48px!important;
+  height:24px!important;
+  min-height:24px!important;
+  max-height:24px!important;
+  margin:0 0 0 4px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+}
+#desktop > header.topbar .topbar-right > #menuBarBatteryCrop > #menuBarBattery{
+  position:absolute!important;
+  display:block!important;
+  left:-28px!important;
+  top:-17px!important;
+  width:104px!important;
+  min-width:104px!important;
+  max-width:104px!important;
+  height:58px!important;
+  min-height:58px!important;
+  max-height:58px!important;
+  margin:0!important;
+  padding:0!important;
+  flex:none!important;
+  object-fit:fill!important;
+  transform:none!important;
+  filter:none!important;
+  opacity:1!important;
+}
+@media(max-width:640px){
+  #desktop > header.topbar .topbar-right > #menuBarBatteryCrop{
+    flex-basis:40px!important;
+    width:40px!important;
+    min-width:40px!important;
+    max-width:40px!important;
+    height:22px!important;
+    min-height:22px!important;
+    max-height:22px!important;
+    margin-left:3px!important;
+  }
+  #desktop > header.topbar .topbar-right > #menuBarBatteryCrop > #menuBarBattery{
+    left:-24px!important;
+    top:-14px!important;
+    width:88px!important;
+    min-width:88px!important;
+    max-width:88px!important;
+    height:49px!important;
+    min-height:49px!important;
+    max-height:49px!important;
+  }
+}
