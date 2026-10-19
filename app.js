@@ -198,6 +198,7 @@ $("#systemName").addEventListener("click",()=>{if(!$("#startMenu").classList.con
 const lockScreen = $("#lockScreen");
 const lockTime = $("#lockTime");
 const lockDate = $("#lockDate");
+const lockUnlockHint = $("#lockUnlockHint");
 const lockReveal = $("#lockReveal");
 const lockSignIn = $("#lockSignIn");
 const lockContinue = $("#lockContinue");
@@ -229,9 +230,11 @@ window.setInterval(updateLockClock,15000);
 if(lockReveal)lockReveal.addEventListener("click",revealLockSignIn);
 if(lockBack)lockBack.addEventListener("click",returnToLock);
 if(lockContinue)lockContinue.addEventListener("click",enterHingesDesktop);
+if(lockUnlockHint)lockUnlockHint.addEventListener("click",enterHingesDesktop);
 if(lockScreen){
  let touchStartY=null;
  lockScreen.addEventListener("touchstart",e=>{if(e.touches.length===1)touchStartY=e.touches[0].clientY;},{passive:true});
- lockScreen.addEventListener("touchend",e=>{if(touchStartY===null)return;const delta=touchStartY-e.changedTouches[0].clientY;touchStartY=null;if(delta>55&&lockSignIn?.classList.contains("hidden"))revealLockSignIn();},{passive:true});
- lockScreen.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&lockSignIn?.classList.contains("hidden")){e.preventDefault();revealLockSignIn();}});
+ lockScreen.addEventListener("touchend",e=>{if(touchStartY===null)return;const delta=touchStartY-e.changedTouches[0].clientY;touchStartY=null;if(delta>55)enterHingesDesktop();},{passive:true});
+ lockScreen.addEventListener("wheel",e=>{if(e.deltaY>8)enterHingesDesktop();},{passive:true});
+ lockScreen.addEventListener("keydown",e=>{if(e.key==="ArrowUp"||e.key==="PageUp"||e.key===" "){e.preventDefault();enterHingesDesktop();}});
 }
