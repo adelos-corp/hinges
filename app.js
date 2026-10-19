@@ -156,7 +156,8 @@ $("#appGrid").addEventListener("click",e=>{const b=e.target.closest("[data-open]
 $$(".desktop-icons [data-open],.taskbar [data-open]").forEach(b=>b.addEventListener("click",()=>openApp(b.dataset.open)));
 const trayChevron = $("#trayChevron"); if(trayChevron) trayChevron.addEventListener("click",togglePanel);
 const weatherButton = $("#weatherButton"); if(weatherButton) weatherButton.addEventListener("click",()=>openApp("Weather"));
-$("#openSettings").addEventListener("click",()=>openApp("Settings"));
+const openSettingsButton=$("#openSettings");
+if(openSettingsButton)openSettingsButton.addEventListener("click",()=>openApp("Settings"));
 $("#powerButton").addEventListener("click",()=>{hide($("#startMenu"));show($("#powerDialog"))});
 $("#controlPowerButton")?.addEventListener("click",()=>{hide($("#rightPanel"));hide($("#startMenu"));show($("#powerDialog"))});
 $("#addControlButton")?.addEventListener("click",()=>toast("Control Centre customization is coming later"));
