@@ -221,12 +221,25 @@ function returnToLock(){
  if(lockReveal){lockReveal.classList.remove("hidden");lockReveal.setAttribute("aria-expanded","false");}
 }
 function enterHingesDesktop(){
- if(!lockScreen||!desktop||desktop.classList.contains("is-unlocking"))return;
+ if(!lockScreen||!desktop||!desktop.classList.contains("is-locked"))return;
  desktop.classList.remove("is-locked");
  desktop.classList.add("is-unlocking");
+ /* Force the browser to commit the starting frame before running the reveal. */
+ void desktop.offsetWidth;
  lockScreen.classList.add("is-leaving");
  lockScreen.setAttribute("aria-hidden","true");
- window.setTimeout(()=>{lockScreen.style.display="none";},950);
+ desktop.querySelectorAll(".desktop-icons,.taskbar,.topbar").forEach(el=>{
+   el.classList.remove("unlock-arriving");
+   void el.offsetWidth;
+   el.classList.add("unlock-arriving");
+ });
+ const wallpaper=desktop.querySelector(".wallpaper");
+ if(wallpaper){
+   wallpaper.classList.remove("unlock-wallpaper");
+   void wallpaper.offsetWidth;
+   wallpaper.classList.add("unlock-wallpaper");
+ }
+ window.setTimeout(()=>{lockScreen.style.display="none";},1150);
 }
 updateLockClock();
 window.setInterval(updateLockClock,15000);
@@ -238,6 +251,6 @@ if(lockUnlockHint)lockUnlockHint.addEventListener("click",enterHingesDesktop);
  let touchStartY=null;
  window.addEventListener("touchstart",e=>{if(e.touches.length===1)touchStartY=e.touches[0].clientY;},{passive:true});
  window.addEventListener("touchend",e=>{if(touchStartY===null)return;const delta=touchStartY-e.changedTouches[0].clientY;touchStartY=null;if(delta>55)enterHingesDesktop();},{passive:true});
- window.addEventListener("wheel",e=>{if(e.deltaY>8)enterHingesDesktop();},{passive:true});
+ window.addEventListener("wheel",e=>{if(e.deltaY>0)enterHingesDesktop();},{passive:true,capture:true});
  window.addEventListener("keydown",e=>{if(e.key==="ArrowDown"||e.key==="PageDown"||e.key===" "){if(desktop?.classList.contains("is-locked")){e.preventDefault();enterHingesDesktop();}}});
 }
