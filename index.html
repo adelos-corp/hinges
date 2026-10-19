@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#b8a9d4">
-<title>Hinges · Interactive Desktop</title>
+<meta name="application-version" content="0.0.3">
+<title>Hinges 0.0.3 · Interactive Desktop</title>
 <script>
     try {
       if (sessionStorage.getItem("hingesDesktopUnlocked") === "1") {
@@ -11,7 +12,7 @@
       }
     } catch (e) {}
   </script>
-  <link rel="stylesheet" href="styles.css?v=control-grid-tight-1">
+  <link rel="stylesheet" href="styles.css?v=hinges-0.0.3">
 </head>
 <body>
 <main id="desktop" class="is-locked" aria-label="Hinges desktop">
@@ -71,13 +72,13 @@
     </div>
     <section class="control-section cc-controls-section" aria-label="Quick controls">
       <div class="quick-grid control-centre-grid">
-        <button class="quick-tile selected" data-toggle="wifi" type="button" aria-label="Wi-Fi" title="Wi-Fi"><img class="quick-icon" src="wifi.png" alt=""></button>
-        <button class="quick-tile selected" data-toggle="cellular" type="button" aria-label="Cellular" title="Cellular"><img class="quick-icon" src="cellularbars.png" alt=""></button>
-        <button class="quick-tile selected" data-toggle="bluetooth" type="button" aria-label="Bluetooth" title="Bluetooth"><img class="quick-icon" src="bluetooth.png" alt=""></button>
+        <button class="quick-tile" data-toggle="wifi" type="button" aria-label="Wi-Fi" title="Wi-Fi"><img class="quick-icon" src="wifi.png" alt=""></button>
+        <button class="quick-tile" data-toggle="cellular" type="button" aria-label="Cellular" title="Cellular"><img class="quick-icon" src="cellularbars.png" alt=""></button>
+        <button class="quick-tile" data-toggle="bluetooth" type="button" aria-label="Bluetooth" title="Bluetooth"><img class="quick-icon" src="bluetooth.png" alt=""></button>
         <button class="quick-tile" data-toggle="hotspot" type="button" aria-label="Personal Hotspot" title="Personal Hotspot"><img class="quick-icon" src="personalhotspot.png" alt=""></button>
         <button class="quick-tile" data-toggle="airplane" type="button" aria-label="Airplane mode" title="Airplane mode"><img class="quick-icon" src="aeroplanemode.png" alt=""></button>
-        <button class="quick-tile selected" data-toggle="lockscreen" type="button" aria-label="Lock Screen" title="Lock Screen"><img class="quick-icon" src="lockscreen.png" alt=""></button>
-        <button class="quick-tile selected" data-toggle="touchenabled" type="button" aria-label="Enable Touch" title="Enable Touch"><img class="quick-icon" src="enabletouch.png" alt=""></button>
+        <button class="quick-tile" data-action="lock-screen" type="button" aria-label="Lock Screen" title="Lock Screen"><img class="quick-icon" src="lockscreen.png" alt=""></button>
+        <button class="quick-tile" data-toggle="touchenabled" type="button" aria-label="Enable Touch" title="Enable Touch"><img class="quick-icon" src="enabletouch.png" alt=""></button>
         <button class="quick-tile" data-toggle="bell" type="button" aria-label="Notifications" title="Notifications"><img class="quick-icon" src="notifications.png" alt=""></button>
       </div>
     </section>
@@ -88,11 +89,13 @@
       <button class="topbar-icon control-trigger" id="controlCentreButton" aria-label="Open Control Centre" title="Control Centre">
         <img class="control-centre-icon" src="control%20centre.png" alt="" draggable="false">
       </button>
+      <div id="activeControlIndicators" class="active-control-indicators" role="group" aria-label="Active controls"></div>
     </div>
     <div class="topbar-right">
       <div id="clockButton" class="clock-button" aria-label="Current date and time">
         <strong id="clockDateTime">19 Oct 14:08</strong>
       </div>
+      <img id="menuBarBattery" class="menu-bar-battery" src="battery_white_transparent.png" alt="Battery" title="Battery">
     </div>
   </header>
   <nav class="taskbar" aria-label="Applications dock">
@@ -106,5 +109,5 @@
   <div id="toast" class="toast hidden" role="status"></div>
   <div id="powerDialog" class="glass power-dialog hidden"><h2>Power</h2><p>What would you like Hinges to do?</p><button data-power="sleep">☾　Sleep</button><button data-power="restart">↻　Restart demo</button><button data-power="shutdown">⏻　Shut down demo</button><button data-power="cancel">Cancel</button></div>
 </main>
-<script src="app.js?v=unlock-sequence-2"></script>
+<script src="app.js?v=hinges-0.0.3"></script>
 </body></html>
