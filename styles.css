@@ -543,3 +543,8 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{
 /* Stronger lock-screen typography while preserving the centered composition. */
 .lock-time{font-weight:600;letter-spacing:-.075em}
 .lock-date{font-weight:650;letter-spacing:.005em}
+
+
+/* Tighten the date-to-clock spacing so the date sits just above the time. */
+.lock-clock-block{gap:4px}
+.lock-date{line-height:1.2}
