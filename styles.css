@@ -725,3 +725,17 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
   transform:scale(1.015);
 }
 .lock-screen::after{display:none}
+
+
+/* A barely-there floating motion for the lock icon. */
+.lock-symbol{
+  animation:hinges-lock-hover 3.8s ease-in-out infinite;
+  will-change:transform;
+}
+@keyframes hinges-lock-hover{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .lock-symbol{animation:none;will-change:auto}
+}
