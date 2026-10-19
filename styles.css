@@ -689,3 +689,20 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
     background:rgba(18,15,14,.96);
   }
 }
+
+
+/* Subtle lock-screen wallpaper blur for depth behind the clock. */
+.lock-screen{
+  background-size:cover;
+  background-position:center;
+}
+.lock-screen::after{
+  content:"";
+  position:absolute;
+  inset:-12px;
+  z-index:-1;
+  pointer-events:none;
+  background:inherit;
+  filter:blur(3px);
+  transform:scale(1.015);
+}
