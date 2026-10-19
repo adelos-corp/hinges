@@ -532,3 +532,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{
 .lock-time{display:block;font-size:clamp(76px,13vw,160px);font-weight:300;letter-spacing:-.085em;line-height:.95;font-variant-numeric:tabular-nums}
 .lock-date{margin-top:16px;font-size:clamp(14px,1.8vw,21px);font-weight:450;letter-spacing:-.02em;color:#ffffffed}
 .lock-topline,.lock-reveal,.lock-bottom,.lock-signin{display:none!important}
+
+
+/* Date sits above the clock in the compact Mon 19 Oct format. */
+.lock-clock-block{display:flex;flex-direction:column;align-items:center;gap:14px}
+.lock-date{order:0;margin-top:0;font-size:clamp(14px,1.5vw,19px);font-weight:500;letter-spacing:.015em;color:#ffffffed}
+.lock-time{order:1}
