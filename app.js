@@ -44,7 +44,11 @@ let activeSpace=1, spaces=1, nextWindowId=1, toastTimer, trackIndex=0, isPlaying
 const openWindows=[];
 const states={wifi:false,cellular:false,bluetooth:false,hotspot:false,airplane:false,touchenabled:false,bell:false,battery:false,night:false,focus:false,keyboard:false,sound:false};
 const tracks=[["A quiet afternoon","Hinges Demo"],["Soft geometry","Hinges Demo"],["Pearlescent skies","Hinges Demo"]];
-function toast(message){const el=$("#toast");el.textContent=message;el.classList.remove("hidden");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add("hidden"),2400)}
+function toast(){
+ // Hinges uses quiet, in-place state changes instead of interruptive toast banners.
+ const el=$("#toast");
+ if(el){el.classList.add("hidden");el.textContent="";}
+}
 function show(el){el.classList.remove("hidden")}
 function hide(el){el.classList.add("hidden")}
 function closeOverlays(except){[["#startMenu","start"],["#rightPanel","panel"],["#workspaces","workspaces"],["#powerDialog","power"]].forEach(([sel,key])=>{if(key!==except)hide($(sel))})}
