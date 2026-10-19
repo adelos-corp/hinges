@@ -2320,3 +2320,30 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
   margin:0!important;
   opacity:1!important;
 }
+
+
+/* Make the menu-bar battery visibly larger; the PNG has generous transparent padding. */
+#desktop > header.topbar .topbar-right > #menuBarBattery{
+  display:block!important;
+  width:38px!important;
+  height:24px!important;
+  min-width:38px!important;
+  min-height:24px!important;
+  max-width:38px!important;
+  max-height:24px!important;
+  flex:0 0 38px!important;
+  object-fit:fill!important;
+  margin:0 0 0 2px!important;
+  opacity:1!important;
+}
+@media(max-width:640px){
+  #desktop > header.topbar .topbar-right > #menuBarBattery{
+    width:34px!important;
+    height:22px!important;
+    min-width:34px!important;
+    min-height:22px!important;
+    max-width:34px!important;
+    max-height:22px!important;
+    flex-basis:34px!important;
+  }
+}
