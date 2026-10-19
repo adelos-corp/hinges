@@ -2437,3 +2437,92 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
     max-height:49px!important;
   }
 }
+
+
+/* batteryfinal.png is a solid battery silhouette, so inset the centre to create a readable battery outline. */
+#desktop > header.topbar .topbar-right > #menuBarBatteryCrop{
+  position:relative!important;
+  display:block!important;
+  flex:0 0 36px!important;
+  width:36px!important;
+  min-width:36px!important;
+  max-width:36px!important;
+  height:18px!important;
+  min-height:18px!important;
+  max-height:18px!important;
+  margin:0 2px 0 4px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+}
+#desktop > header.topbar .topbar-right > #menuBarBatteryCrop > #menuBarBattery{
+  position:absolute!important;
+  display:block!important;
+  left:0!important;
+  top:0!important;
+  width:36px!important;
+  min-width:36px!important;
+  max-width:36px!important;
+  height:18px!important;
+  min-height:18px!important;
+  max-height:18px!important;
+  margin:0!important;
+  padding:0!important;
+  flex:none!important;
+  object-fit:fill!important;
+  transform:none!important;
+  filter:none!important;
+  opacity:1!important;
+  z-index:0!important;
+}
+/* Cut back the solid centre, leaving the uploaded image as the white battery shell. */
+#desktop > header.topbar .topbar-right > #menuBarBatteryCrop::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:1!important;
+  left:4px!important;
+  right:7px!important;
+  top:4px!important;
+  bottom:4px!important;
+  border-radius:2px!important;
+  background:rgba(12,14,18,.88)!important;
+  pointer-events:none!important;
+}
+#desktop > header.topbar .topbar-right > #menuBarBatteryCrop::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:2!important;
+  left:6px!important;
+  right:9px!important;
+  top:6px!important;
+  height:6px!important;
+  background:repeating-linear-gradient(90deg,#fff 0 4px,transparent 4px 6px)!important;
+  pointer-events:none!important;
+}
+@media(max-width:640px){
+  #desktop > header.topbar .topbar-right > #menuBarBatteryCrop{
+    flex-basis:32px!important;
+    width:32px!important;
+    min-width:32px!important;
+    max-width:32px!important;
+    height:16px!important;
+    min-height:16px!important;
+    max-height:16px!important;
+    margin:0 2px 0 3px!important;
+  }
+  #desktop > header.topbar .topbar-right > #menuBarBatteryCrop > #menuBarBattery{
+    width:32px!important;
+    min-width:32px!important;
+    max-width:32px!important;
+    height:16px!important;
+    min-height:16px!important;
+    max-height:16px!important;
+  }
+  #desktop > header.topbar .topbar-right > #menuBarBatteryCrop::before{
+    left:3.5px!important;right:6px!important;top:3.5px!important;bottom:3.5px!important;
+  }
+  #desktop > header.topbar .topbar-right > #menuBarBatteryCrop::after{
+    left:5px!important;right:8px!important;top:5.5px!important;height:5px!important;
+    background:repeating-linear-gradient(90deg,#fff 0 3px,transparent 3px 5px)!important;
+  }
+}
