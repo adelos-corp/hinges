@@ -553,3 +553,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{
 /* Date and clock should read as one tight typographic unit. */
 .lock-clock-block{gap:0}
 .lock-date{line-height:1.05}
+
+
+/* Final lock-screen micro-adjustment: nudge the date slightly toward the clock. */
+.lock-date{transform:translateY(3px)}
