@@ -2069,17 +2069,25 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
 }
 
 
-/* Balanced Control Centre icon size; keep the full-size hit target. */
+/* Compact Control Centre button and glyph: both are exactly 24px square. */
 #desktop > header.topbar #controlCentreButton{
   position:relative!important;
-  width:44px!important;
-  min-width:44px!important;
-  height:44px!important;
+  display:grid!important;
+  place-items:center!important;
+  width:24px!important;
+  min-width:24px!important;
+  max-width:24px!important;
+  height:24px!important;
+  min-height:24px!important;
+  max-height:24px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0 0 6px 0!important;
 }
 #desktop > header.topbar .control-centre-icon{
-  position:absolute!important;
-  left:50%!important;
-  top:50%!important;
+  display:block!important;
+  position:static!important;
   width:24px!important;
   height:24px!important;
   min-width:24px!important;
@@ -2089,5 +2097,5 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
   margin:0!important;
   padding:0!important;
   object-fit:contain!important;
-  transform:translate(-50%,-50%)!important;
+  transform:none!important;
 }
