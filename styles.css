@@ -1764,3 +1764,45 @@ html,body,#desktop{
   #desktop > header.topbar .topbar-left,
   #desktop > header.topbar .topbar-right{padding:0!important;margin:0!important}
 }
+
+
+/* Remove the hover highlight box. Keep controls in their normal visual state. */
+.desktop-icon:hover{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.taskbar-button:hover,
+.taskbar-button:focus-visible{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+.topbar-icon:hover,
+.topbar-icon:focus-visible,
+.background-app:hover,
+#controlCentreButton:hover,
+#controlCentreButton:focus-visible{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+.app-item:hover,
+.mini-control:hover,
+.media-card button:hover,
+.lock-unlock-hint:hover{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border-color:transparent!important;
+}
+.calendar-icon:hover{background:#ffffff80!important;box-shadow:none!important}
+.round-close:hover{background:#ffffff75!important;box-shadow:none!important}
+.utility-row button:hover{background:#ffffff63!important;box-shadow:none!important}
+.space-tab:not(.active):hover,
+.add-space:hover{background:#ffffff50!important;box-shadow:none!important}
+.workspace-card:hover{background:#ffffff72!important;box-shadow:none!important}
+.power-dialog button:hover{background:#ffffff60!important;box-shadow:none!important}
+.lock-continue:hover{background:transparent!important;box-shadow:none!important}
