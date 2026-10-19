@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#b8a9d4">
 <title>Hinges · Interactive Desktop</title>
-<link rel="stylesheet" href="styles.css?v=hover-clear-1">
+<link rel="stylesheet" href="styles.css?v=control-centre-4x2-1">
 </head>
 <body>
 <main id="desktop" class="is-locked" aria-label="Hinges desktop">
@@ -44,29 +44,35 @@
     <p class="workspace-hint">Drag between desktops · Select a window to return to it</p>
   </section>
 
-  <aside id="rightPanel" class="glass right-panel hidden" aria-label="Notification Centre and Control Centre">
-    <div class="date-card"><div><small id="dateDay">FRIDAY</small><strong id="dateFull">16 October 2026</strong></div><button class="calendar-icon" title="Calendar">▦</button></div>
-    <section class="notifications-section">
-      <div class="section-heading"><h2>Notifications</h2><button id="clearNotifications" class="text-button">Clear all</button></div>
-      <div id="notifications" class="notifications-list">
-        <article class="notification"><div class="notification-app whatsapp">◉</div><div class="notification-copy"><strong>Messages</strong><p>You’re all caught up. New notifications will appear here.</p><small>Just now</small></div><button class="dismiss-note" aria-label="Dismiss notification">×</button></article>
-        <article class="notification"><div class="notification-app system">✧</div><div class="notification-copy"><strong>Hinges</strong><p>Your desktop prototype is ready to explore.</p><small>Just now</small></div><button class="dismiss-note" aria-label="Dismiss notification">×</button></article>
+  <aside id="rightPanel" class="glass right-panel control-centre-panel hidden" aria-label="Control Centre">
+    <div class="cc-top-actions">
+      <button id="addControlButton" class="cc-top-action" type="button" aria-label="Add controls" title="Add controls">+</button>
+      <button id="controlPowerButton" class="cc-top-action cc-power-action" type="button" aria-label="Power" title="Power">⏻</button>
+    </div>
+    <div class="cc-status-row" aria-label="Device status">
+      <div class="cc-status-left">
+        <img class="cc-status-signal" src="cellularbars.png" alt="">
+        <span class="cc-carrier">Airtel</span>
+        <img class="cc-status-wifi" src="wifi.png" alt="Wi-Fi connected">
       </div>
-    </section>
-    <section class="control-section">
-      <div class="section-heading"><h2>Control Centre</h2><button class="settings-shortcut" id="openSettings" title="Settings">⚙</button></div>
-      <div class="quick-grid">
-        <button class="quick-tile selected" data-toggle="wifi"><span class="quick-icon">⌁</span><strong>Wi-Fi</strong><small>Connected</small></button>
-        <button class="quick-tile" data-toggle="bluetooth"><span class="quick-icon">ᛒ</span><strong>Bluetooth</strong><small>On</small></button>
-        <button class="quick-tile" data-toggle="airplane"><span class="quick-icon">✈</span><strong>Airplane mode</strong><small>Off</small></button>
-        <button class="quick-tile" data-toggle="battery"><span class="quick-icon">▱</span><strong>Battery saver</strong><small>Off</small></button>
-        <button class="quick-tile" data-toggle="night"><span class="quick-icon">☼</span><strong>Night light</strong><small>Off</small></button>
-        <button class="quick-tile" data-toggle="focus"><span class="quick-icon">☾</span><strong>Focus</strong><small>Off</small></button>
+      <div class="cc-status-right">
+        <svg class="cc-status-mark cc-alarm-mark" viewBox="0 0 24 24" aria-label="Alarm set" role="img"><path d="M7 3.8 4.3 6.5M17 3.8l2.7 2.7M6.5 9.2a5.5 5.5 0 0 1 11 0v5.2l2 2H4.5l2-2zM9.3 19.2h5.4M12 7.5v3.4l2 1.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="cc-status-mark cc-rotation-mark" viewBox="0 0 24 24" aria-label="Rotation lock" role="img"><path d="M20 8.5A8.5 8.5 0 0 0 5.1 5.4L3.5 7M3.5 3.6V7h3.4M4 15.5a8.5 8.5 0 0 0 14.9 3.1l1.6-1.6M20.5 20.4V17h-3.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><rect x="8.5" y="9.5" width="7" height="6.5" rx="1.2" fill="currentColor"/><path d="M10 9.5V8a2 2 0 0 1 4 0v1.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span class="cc-battery-percent">90%</span>
+        <img class="cc-status-battery" src="battery_white_transparent.png" alt="Battery">
       </div>
-      <div class="media-card"><div class="album-art">♫</div><div class="media-copy"><strong id="trackName">Nothing playing</strong><small id="trackArtist">Choose a media demo</small></div><button id="prevTrack" aria-label="Previous track">|◂</button><button id="playTrack" aria-label="Play or pause">▶</button><button id="nextTrack" aria-label="Next track">▸|</button></div>
-      <div class="slider-card"><div class="slider-label"><span>◖)) <b>Sound</b></span><output id="volumeValue">65%</output></div><input id="volumeSlider" type="range" min="0" max="100" value="65" aria-label="Volume"></div>
-      <div class="slider-card"><div class="slider-label"><span>☼ <b>Display brightness</b></span><output id="brightnessValue">75%</output></div><input id="brightnessSlider" type="range" min="10" max="100" value="75" aria-label="Display brightness"></div>
-      <div class="utility-row"><button data-toggle="keyboard"><span>⌨</span><small>Keyboard</small></button><button data-toggle="battery"><span>▱</span><small>Battery saver</small></button><button data-toggle="night"><span>☼</span><small>Night light</small></button><button data-toggle="focus"><span>☾</span><small>Focus</small></button></div>
+    </div>
+    <section class="control-section cc-controls-section" aria-label="Quick controls">
+      <div class="quick-grid control-centre-grid">
+        <button class="quick-tile selected" data-toggle="wifi" type="button" aria-label="Wi-Fi" title="Wi-Fi"><img class="quick-icon" src="wifi.png" alt=""></button>
+        <button class="quick-tile selected" data-toggle="cellular" type="button" aria-label="Cellular" title="Cellular"><img class="quick-icon" src="cellularbars.png" alt=""></button>
+        <button class="quick-tile selected" data-toggle="bluetooth" type="button" aria-label="Bluetooth" title="Bluetooth"><img class="quick-icon" src="bluetooth.png" alt=""></button>
+        <button class="quick-tile" data-toggle="hotspot" type="button" aria-label="Personal Hotspot" title="Personal Hotspot"><img class="quick-icon" src="personalhotspot.png" alt=""></button>
+        <button class="quick-tile" data-toggle="airplane" type="button" aria-label="Airplane mode" title="Airplane mode"><img class="quick-icon" src="aeroplanemode.png" alt=""></button>
+        <button class="quick-tile selected" data-toggle="lockscreen" type="button" aria-label="Lock Screen" title="Lock Screen"><img class="quick-icon" src="lockscreen.png" alt=""></button>
+        <button class="quick-tile selected" data-toggle="touchenabled" type="button" aria-label="Enable Touch" title="Enable Touch"><img class="quick-icon" src="enabletouch.png" alt=""></button>
+        <button class="quick-tile" data-toggle="bell" type="button" aria-label="Notifications" title="Notifications"><img class="quick-icon" src="notifications.png" alt=""></button>
+      </div>
     </section>
   </aside>
 
@@ -93,5 +99,5 @@
   <div id="toast" class="toast hidden" role="status"></div>
   <div id="powerDialog" class="glass power-dialog hidden"><h2>Power</h2><p>What would you like Hinges to do?</p><button data-power="sleep">☾　Sleep</button><button data-power="restart">↻　Restart demo</button><button data-power="shutdown">⏻　Shut down demo</button><button data-power="cancel">Cancel</button></div>
 </main>
-<script src="app.js?v=menu-bar-final-1"></script>
+<script src="app.js?v=control-centre-4x2-1"></script>
 </body></html>
