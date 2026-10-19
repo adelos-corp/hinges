@@ -1303,126 +1303,17 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 }
 
 
-/* Unlock transition: the desktop resolves out of a close, oversized state. */
-#desktop.is-locked .wallpaper{
-  transform:scale(1.12);
-  filter:blur(10px) brightness(.72);
-  opacity:.8;
-}
-#desktop .wallpaper{
-  transition:transform 1050ms cubic-bezier(.16,1,.3,1),filter 1050ms cubic-bezier(.16,1,.3,1),opacity 800ms ease;
-  will-change:transform,filter,opacity;
-}
-#desktop.is-locked .desktop-icons,
-#desktop.is-locked #taskbar,
-#desktop.is-locked #menuBar,
-#desktop.is-locked #controlCentre,
-#desktop.is-locked #controlCenter,
-#desktop.is-locked #startMenu,
-#desktop.is-locked #windowLayer{
-  opacity:0;
-  transform:translateY(24px) scale(1.16);
-  filter:blur(9px);
-}
-#desktop .desktop-icons,
-#desktop #taskbar,
-#desktop #menuBar,
-#desktop #controlCentre,
-#desktop #controlCenter,
-#desktop #startMenu,
-#desktop #windowLayer{
-  transform-origin:50% 100%;
-  transition:transform 900ms cubic-bezier(.16,1,.3,1),opacity 560ms ease,filter 760ms ease;
-  will-change:transform,opacity,filter;
-}
-#desktop.is-unlocking .wallpaper{
-  transform:scale(1);
-  filter:blur(0) brightness(1);
-  opacity:1;
-}
-#desktop.is-unlocking .desktop-icons,
-#desktop.is-unlocking #taskbar,
-#desktop.is-unlocking #menuBar,
-#desktop.is-unlocking #controlCentre,
-#desktop.is-unlocking #controlCenter,
-#desktop.is-unlocking #startMenu,
-#desktop.is-unlocking #windowLayer{
-  opacity:1;
-  transform:translateY(0) scale(1);
-  filter:blur(0);
-}
-#desktop.is-unlocking .desktop-icons{transition-delay:100ms}
-#desktop.is-unlocking #taskbar{transition-delay:140ms}
-#desktop.is-unlocking #menuBar{transition-delay:190ms}
-#desktop.is-unlocking #controlCentre,
-#desktop.is-unlocking #controlCenter{transition-delay:230ms}
-#desktop.is-unlocking #startMenu,
-#desktop.is-unlocking #windowLayer{transition-delay:270ms}
-#desktop .lock-screen{
-  transition:opacity 520ms ease,transform 900ms cubic-bezier(.16,1,.3,1),filter 650ms ease;
-}
-#desktop.is-unlocking .lock-screen{
-  opacity:0;
-  transform:scale(1.09);
-  filter:blur(12px);
-  pointer-events:none;
-}
 
-
-/* Correctly target Hinges' real desktop chrome: these are classes, not IDs. */
-#desktop.is-locked .desktop-icons,
-#desktop.is-locked .taskbar,
-#desktop.is-locked .topbar,
-#desktop.is-locked #rightPanel,
-#desktop.is-locked #notificationPanel,
-#desktop.is-locked #powerDialog,
-#desktop.is-locked #workspaces{
-  opacity:0!important;
-  transform:translateY(34px) scale(1.2)!important;
-  filter:blur(12px);
-  pointer-events:none;
-}
-#desktop .desktop-icons,
-#desktop .taskbar,
-#desktop .topbar,
-#desktop #rightPanel,
-#desktop #notificationPanel,
-#desktop #powerDialog,
-#desktop #workspaces{
-  transition:opacity 650ms ease,transform 1050ms cubic-bezier(.16,1,.3,1),filter 850ms ease!important;
-  transform-origin:50% 100%;
-  will-change:opacity,transform,filter;
-}
-#desktop.is-unlocking .desktop-icons,
-#desktop.is-unlocking .taskbar,
-#desktop.is-unlocking .topbar,
-#desktop.is-unlocking #rightPanel,
-#desktop.is-unlocking #notificationPanel,
-#desktop.is-unlocking #powerDialog,
-#desktop.is-unlocking #workspaces{
-  opacity:1!important;
-  transform:translateY(0) scale(1)!important;
-  filter:blur(0);
-  pointer-events:auto;
-}
-#desktop.is-unlocking .desktop-icons{transition-delay:90ms!important}
-#desktop.is-unlocking .taskbar{transition-delay:170ms!important}
-#desktop.is-unlocking .topbar{transition-delay:230ms!important}
-#desktop.is-unlocking #rightPanel,
-#desktop.is-unlocking #notificationPanel{transition-delay:280ms!important}
-
-
-/* Explicit keyframe-driven reveal, so the unlock motion is not dependent on
-   incidental CSS transitions or selector specificity. */
+/* Hinges unlock choreography. Initial state is locked; keyframes perform the reveal. */
 @keyframes hinges-chrome-pop{
-  0%{opacity:0;transform:translateY(38px) scale(1.22);filter:blur(14px)}
-  58%{opacity:1;filter:blur(1px)}
+  0%{opacity:0;transform:translateY(42px) scale(1.2);filter:blur(14px)}
+  58%{opacity:1;filter:blur(1.5px)}
   78%{transform:translateY(-3px) scale(.99);filter:blur(0)}
   100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
 }
 @keyframes hinges-wallpaper-focus{
-  0%{transform:scale(1.14);filter:blur(14px) brightness(.58)}
-  65%{filter:blur(2px) brightness(.9)}
+  0%{transform:scale(1.15);filter:blur(16px) brightness(.55)}
+  62%{filter:blur(2px) brightness(.9)}
   100%{transform:scale(1);filter:blur(0) brightness(1)}
 }
 @keyframes hinges-lock-zoom-away{
@@ -1430,27 +1321,43 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
   38%{opacity:1;transform:scale(1.035);filter:blur(1px)}
   100%{opacity:0;transform:scale(1.16);filter:blur(16px)}
 }
+#desktop.is-locked .wallpaper{
+  transform:scale(1.15);
+  filter:blur(16px) brightness(.55);
+}
 #desktop.is-locked .desktop-icons,
 #desktop.is-locked .taskbar,
-#desktop.is-locked .topbar{
-  opacity:0!important;
-  pointer-events:none!important;
+#desktop.is-locked .topbar,
+#desktop.is-locked #rightPanel,
+#desktop.is-locked #workspaces,
+#desktop.is-locked #powerDialog{
+  opacity:0;
+  transform:translateY(42px) scale(1.2);
+  filter:blur(14px);
+  pointer-events:none;
 }
-#desktop.is-unlocking .lock-screen{
+#desktop.is-unlocking .wallpaper.unlock-wallpaper{
+  animation:hinges-wallpaper-focus 1150ms cubic-bezier(.16,1,.3,1) both;
+}
+#desktop.is-unlocking .lock-screen.is-leaving{
+  visibility:visible!important;
+  transition:none!important;
   animation:hinges-lock-zoom-away 1050ms cubic-bezier(.2,.75,.25,1) both!important;
 }
-#desktop .desktop-icons.unlock-arriving{
-  animation:hinges-chrome-pop 1050ms cubic-bezier(.16,1,.3,1) 80ms both!important;
-  pointer-events:auto!important;
+#desktop.is-unlocking .desktop-icons.unlock-arriving{
+  animation:hinges-chrome-pop 1000ms cubic-bezier(.16,1,.3,1) 70ms both;
+  pointer-events:auto;
 }
-#desktop .taskbar.unlock-arriving{
-  animation:hinges-chrome-pop 1120ms cubic-bezier(.16,1,.3,1) 150ms both!important;
-  pointer-events:auto!important;
+#desktop.is-unlocking .taskbar.unlock-arriving{
+  animation:hinges-chrome-pop 1080ms cubic-bezier(.16,1,.3,1) 160ms both;
+  pointer-events:auto;
 }
-#desktop .topbar.unlock-arriving{
-  animation:hinges-chrome-pop 1080ms cubic-bezier(.16,1,.3,1) 220ms both!important;
-  pointer-events:auto!important;
+#desktop.is-unlocking .topbar.unlock-arriving{
+  animation:hinges-chrome-pop 1040ms cubic-bezier(.16,1,.3,1) 240ms both;
+  pointer-events:auto;
 }
-#desktop .wallpaper.unlock-wallpaper{
-  animation:hinges-wallpaper-focus 1150ms cubic-bezier(.16,1,.3,1) both!important;
+#desktop.is-unlocking #rightPanel.unlock-arriving,
+#desktop.is-unlocking #workspaces.unlock-arriving,
+#desktop.is-unlocking #powerDialog.unlock-arriving{
+  animation:hinges-chrome-pop 950ms cubic-bezier(.16,1,.3,1) 280ms both;
 }
