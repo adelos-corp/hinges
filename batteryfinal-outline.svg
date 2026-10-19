@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="432" height="197" viewBox="0 0 432 197" fill="none">
+  <defs>
+    <mask id="battery-outline" maskUnits="userSpaceOnUse" x="0" y="0" width="432" height="197">
+      <image href="batteryfinal.png" x="0" y="0" width="432" height="197" preserveAspectRatio="none"/>
+      <rect x="29" y="28" width="323" height="141" rx="20" fill="#000000"/>
+    </mask>
+  </defs>
+  <rect width="432" height="197" fill="#FFFFFF" mask="url(#battery-outline)"/>
+</svg>
