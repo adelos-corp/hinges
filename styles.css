@@ -1361,3 +1361,113 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 #desktop.is-unlocking #powerDialog.unlock-arriving{
   animation:hinges-chrome-pop 950ms cubic-bezier(.16,1,.3,1) 280ms both;
 }
+
+
+/* Final unlock-motion pass: slower, more continuous spatial easing. */
+@keyframes hinges-chrome-pop{
+  0%{
+    opacity:0;
+    transform:translate3d(0,54px,0) scale(1.18);
+    filter:blur(12px);
+  }
+  36%{
+    opacity:.72;
+    filter:blur(5px);
+  }
+  70%{
+    opacity:1;
+    transform:translate3d(0,-2px,0) scale(.995);
+    filter:blur(0);
+  }
+  100%{
+    opacity:1;
+    transform:translate3d(0,0,0) scale(1);
+    filter:blur(0);
+  }
+}
+@keyframes hinges-wallpaper-focus{
+  0%{
+    transform:scale(1.13);
+    filter:blur(14px) brightness(.56);
+  }
+  42%{
+    filter:blur(7px) brightness(.76);
+  }
+  76%{
+    transform:scale(1.012);
+    filter:blur(1px) brightness(.97);
+  }
+  100%{
+    transform:scale(1);
+    filter:blur(0) brightness(1);
+  }
+}
+@keyframes hinges-lock-zoom-away{
+  0%{
+    opacity:1;
+    transform:scale(1);
+    filter:blur(0);
+  }
+  32%{
+    opacity:1;
+    transform:scale(1.025);
+    filter:blur(1px);
+  }
+  100%{
+    opacity:0;
+    transform:scale(1.13);
+    filter:blur(13px);
+  }
+}
+#desktop.is-locked .wallpaper{
+  transform:scale(1.13);
+  filter:blur(14px) brightness(.56);
+}
+#desktop.is-locked .desktop-icons,
+#desktop.is-locked .taskbar,
+#desktop.is-locked .topbar,
+#desktop.is-locked #rightPanel,
+#desktop.is-locked #workspaces,
+#desktop.is-locked #powerDialog{
+  opacity:0;
+  transform:translate3d(0,54px,0) scale(1.18);
+  filter:blur(12px);
+  pointer-events:none;
+}
+#desktop.is-unlocking .wallpaper.unlock-wallpaper{
+  animation:hinges-wallpaper-focus 1750ms cubic-bezier(.16,1,.3,1) both;
+}
+#desktop.is-unlocking .lock-screen.is-leaving{
+  visibility:visible!important;
+  transition:none!important;
+  animation:hinges-lock-zoom-away 1600ms cubic-bezier(.16,1,.3,1) both!important;
+}
+#desktop.is-unlocking .desktop-icons.unlock-arriving{
+  animation:hinges-chrome-pop 1450ms cubic-bezier(.16,1,.3,1) 80ms both;
+  pointer-events:auto;
+}
+#desktop.is-unlocking .taskbar.unlock-arriving{
+  animation:hinges-chrome-pop 1650ms cubic-bezier(.16,1,.3,1) 190ms both;
+  pointer-events:auto;
+}
+#desktop.is-unlocking .topbar.unlock-arriving{
+  animation:hinges-chrome-pop 1550ms cubic-bezier(.16,1,.3,1) 120ms both;
+  pointer-events:auto;
+}
+#desktop.is-unlocking #rightPanel.unlock-arriving,
+#desktop.is-unlocking #workspaces.unlock-arriving,
+#desktop.is-unlocking #powerDialog.unlock-arriving{
+  animation:hinges-chrome-pop 1450ms cubic-bezier(.16,1,.3,1) 260ms both;
+}
+
+/* The taskbar surface stays completely clear: only the icon targets remain visible. */
+#desktop .taskbar,
+#desktop.is-locked .taskbar,
+#desktop.is-unlocking .taskbar{
+  background:transparent!important;
+  background-color:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
