@@ -396,3 +396,92 @@ button:focus-visible,input:focus-visible{
 /* Hide the system-name label while retaining its harmless Start-menu binding. */
 .topbar .system-name{display:none}
 .topbar-left{gap:10px}
+
+/* Windows 11H design foundation — light-first glass, hybrid shell. */
+:root{
+  color-scheme:light;
+  --h11h-color-text:#292536;
+  --h11h-color-muted:#716b7d;
+  --h11h-color-accent:#7652c7;
+  --h11h-color-accent-strong:#6240b0;
+  --h11h-color-accent-soft:rgba(118,82,199,.12);
+  --h11h-surface-glass:rgba(250,248,255,.72);
+  --h11h-surface-raised:rgba(255,255,255,.74);
+  --h11h-surface-subtle:rgba(255,255,255,.48);
+  --h11h-border:rgba(255,255,255,.82);
+  --h11h-border-subtle:rgba(87,70,117,.14);
+  --h11h-shadow:0 20px 56px rgba(43,31,66,.16);
+  --h11h-radius-control:10px;
+  --h11h-radius-card:16px;
+  --h11h-radius-panel:22px;
+  --h11h-motion-fast:140ms;
+  --h11h-motion-standard:200ms;
+  --h11h-ease:cubic-bezier(.2,.7,.2,1);
+}
+.glass{
+  background:var(--h11h-surface-glass);
+  border-color:var(--h11h-border);
+  box-shadow:var(--h11h-shadow);
+}
+button:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--h11h-color-accent);
+  outline-offset:3px;
+}
+.topbar{
+  color:var(--h11h-color-text);
+  text-shadow:none;
+}
+.topbar-icon:hover,.topbar-icon:focus-visible,
+.background-app:hover{
+  background:rgba(55,42,79,.09);
+}
+.topbar .clock-button{
+  color:inherit;
+  text-shadow:none;
+}
+.topbar .notification-dot{
+  background:var(--h11h-color-accent);
+  box-shadow:0 0 0 1px rgba(255,255,255,.9);
+}
+.topbar .battery-status{
+  filter:brightness(0) saturate(100%) opacity(.82);
+}
+.taskbar-button:hover,.taskbar-button:focus-visible{
+  background:rgba(255,255,255,.52);
+  box-shadow:0 3px 12px rgba(43,31,66,.08);
+}
+.command-form input,
+.date-card,
+.notifications-section,
+.control-section,
+.notification,
+.quick-tile,
+.media-card,
+.slider-card,
+.utility-row button,
+.space-tab,
+.add-space,
+.round-close{
+  color:var(--h11h-color-text);
+}
+.quick-tile.selected{
+  background:linear-gradient(145deg,#9678df,#7452c5);
+  border-color:rgba(255,255,255,.92);
+  color:#fff;
+}
+.text-button,.settings-shortcut{
+  color:var(--h11h-color-accent-strong);
+}
+.app-item,.taskbar-button,.topbar-icon,.background-app,.quick-tile,
+.mini-control,.calendar-icon,.round-close{
+  transition-duration:var(--h11h-motion-standard);
+  transition-timing-function:var(--h11h-ease);
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+  }
+}
