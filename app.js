@@ -42,7 +42,7 @@ if(appGrid){
 }
 let activeSpace=1, spaces=1, nextWindowId=1, toastTimer, trackIndex=0, isPlaying=false;
 const openWindows=[];
-const states={wifi:true,cellular:true,bluetooth:true,hotspot:false,airplane:false,lockscreen:true,touchenabled:true,bell:false,battery:false,night:false,focus:false,keyboard:false,sound:true};
+const states={wifi:false,cellular:false,bluetooth:false,hotspot:false,airplane:false,touchenabled:false,bell:false,battery:false,night:false,focus:false,keyboard:false,sound:false};
 const tracks=[["A quiet afternoon","Hinges Demo"],["Soft geometry","Hinges Demo"],["Pearlescent skies","Hinges Demo"]];
 function toast(message){const el=$("#toast");el.textContent=message;el.classList.remove("hidden");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add("hidden"),2400)}
 function show(el){el.classList.remove("hidden")}
@@ -68,17 +68,71 @@ function updateDateTime(){
  if(dateFull)dateFull.textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,day:"numeric",month:"long",year:"numeric"}).format(now);
 }
 updateDateTime();setInterval(updateDateTime,15000);
+const menuIndicatorDefinitions={
+ wifi:{src:"wifi.png",label:"Wi-Fi"},
+ cellular:{src:"cellularbars.png",label:"Cellular"},
+ bluetooth:{src:"bluetooth.png",label:"Bluetooth"},
+ hotspot:{src:"personalhotspot.png",label:"Personal Hotspot"},
+ airplane:{src:"aeroplanemode.png",label:"Airplane Mode"},
+ touchenabled:{src:"enabletouch.png",label:"Touch Enabled"},
+ bell:{src:"notifications.png",label:"Notifications"}
+};
+function renderMenuBarIndicators(){
+ const container=$("#activeControlIndicators");
+ if(!container)return;
+ const activeKeys=Object.keys(menuIndicatorDefinitions).filter(key=>states[key]);
+ const existing=new Map([...container.children].map(node=>[node.dataset.stateIndicator,node]));
+ activeKeys.forEach(key=>{
+  let node=existing.get(key);
+  if(node){
+   existing.delete(key);
+   node.classList.remove("is-removing");
+   return;
+  }
+  node=document.createElement("span");
+  node.className="menu-control-indicator";
+  node.dataset.stateIndicator=key;
+  node.setAttribute("role","img");
+  node.setAttribute("aria-label",menuIndicatorDefinitions[key].label+" active");
+  const icon=document.createElement("img");
+  icon.src=menuIndicatorDefinitions[key].src;
+  icon.alt="";
+  icon.draggable=false;
+  node.appendChild(icon);
+  container.appendChild(node);
+ });
+ existing.forEach(node=>{
+  if(node.classList.contains("is-removing"))return;
+  node.classList.add("is-removing");
+  const remove=()=>{if(node.classList.contains("is-removing"))node.remove()};
+  node.addEventListener("animationend",remove,{once:true});
+  window.setTimeout(remove,260);
+ });
+}
 function renderStates(){
- $$("[data-toggle]").forEach(btn=>{const key=btn.dataset.toggle;if(!(key in states))return;const on=states[key];btn.classList.toggle("selected",on);if(btn.classList.contains("quick-tile")){const small=$("small",btn);if(small)small.textContent=on?(key==="wifi"?"Connected":"On"):"Off";}});
+ $$("[data-toggle]").forEach(btn=>{
+  const key=btn.dataset.toggle;
+  if(!(key in states))return;
+  const on=states[key];
+  btn.classList.toggle("selected",on);
+  btn.setAttribute("aria-pressed",String(on));
+  if(btn.classList.contains("quick-tile")){
+   const small=$("small",btn);
+   if(small)small.textContent=on?(key==="wifi"?"Connected":"On"):"Off";
+  }
+ });
+ renderMenuBarIndicators();
 }
 function toggleState(key){
  if(!(key in states))return;
  states[key]=!states[key];
- if(key==="airplane"&&states.airplane){states.wifi=false;states.bluetooth=false}
- if((key==="wifi"||key==="bluetooth")&&states[key])states.airplane=false;
+ if(key==="airplane"&&states.airplane){
+  states.wifi=false;states.bluetooth=false;states.cellular=false;states.hotspot=false;
+ }
+ if((key==="wifi"||key==="bluetooth"||key==="cellular"||key==="hotspot")&&states[key])states.airplane=false;
  if(key==="night")$("#desktop").classList.toggle("night-mode",states.night);
-renderStates();
- const labels={wifi:"Wi-Fi",cellular:"Cellular",bluetooth:"Bluetooth",hotspot:"Personal Hotspot",airplane:"Airplane mode",lockscreen:"Lock Screen",touchenabled:"Enable Touch",bell:"Notifications",battery:"Battery saver",night:"Night light",focus:"Focus mode",keyboard:"Keyboard",sound:"Sound"};
+ renderStates();
+ const labels={wifi:"Wi-Fi",cellular:"Cellular",bluetooth:"Bluetooth",hotspot:"Personal Hotspot",airplane:"Airplane mode",touchenabled:"Touch",bell:"Notifications",battery:"Battery saver",night:"Night light",focus:"Focus mode",keyboard:"Keyboard",sound:"Sound"};
  toast((labels[key]||key)+" "+(states[key]?"turned on":"turned off"));
 }
 function windowMarkup(name,id){
@@ -227,6 +281,8 @@ function renderTopBar(){
  });
 }
 $("#controlCentreButton").addEventListener("click",togglePanel);
+const lockControlButton=$('#rightPanel [data-action="lock-screen"]');
+if(lockControlButton)lockControlButton.addEventListener("click",lockHingesDesktop);
 
 
 // Wallpaper-first lock screen prototype. This is visual navigation, not authentication.
@@ -258,7 +314,7 @@ function returnToLock(){
 function enterHingesDesktop(){
  if(!lockScreen||!desktop||!desktop.classList.contains("is-locked"))return;
  try{sessionStorage.setItem("hingesDesktopUnlocked","1");}catch(e){}
- desktop.classList.remove("is-locked");
+ desktop.classList.remove("is-locked","is-locking");
  desktop.classList.add("is-unlocking");
  /* Force the browser to commit the starting frame before running the reveal. */
  void desktop.offsetWidth;
@@ -276,6 +332,25 @@ function enterHingesDesktop(){
    wallpaper.classList.add("unlock-wallpaper");
  }
  window.setTimeout(()=>{lockScreen.style.display="none";},1700);
+}
+
+
+function lockHingesDesktop(){
+ if(!desktop||!lockScreen||desktop.classList.contains("is-locked"))return;
+ try{sessionStorage.removeItem("hingesDesktopUnlocked");}catch(e){}
+ document.documentElement.removeAttribute("data-hinges-start");
+ hide($("#rightPanel"));hide($("#startMenu"));hide($("#workspaces"));hide($("#powerDialog"));
+ desktop.classList.remove("is-unlocking");
+ desktop.querySelectorAll(".desktop-icons,.taskbar,.topbar").forEach(el=>el.classList.remove("unlock-arriving"));
+ const wallpaper=desktop.querySelector(".wallpaper");
+ if(wallpaper)wallpaper.classList.remove("unlock-wallpaper");
+ lockScreen.style.display="";
+ lockScreen.classList.remove("is-leaving");
+ lockScreen.setAttribute("aria-hidden","false");
+ desktop.classList.remove("is-locked");
+ void lockScreen.offsetWidth;
+ desktop.classList.add("is-locking","is-locked");
+ window.setTimeout(()=>desktop.classList.remove("is-locking"),2600);
 }
 updateLockClock();
 window.setInterval(updateLockClock,15000);
