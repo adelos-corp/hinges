@@ -1367,3 +1367,46 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
   filter:blur(12px);
   pointer-events:none;
 }
+
+
+/* Correctly target Hinges' real desktop chrome: these are classes, not IDs. */
+#desktop.is-locked .desktop-icons,
+#desktop.is-locked .taskbar,
+#desktop.is-locked .topbar,
+#desktop.is-locked #rightPanel,
+#desktop.is-locked #notificationPanel,
+#desktop.is-locked #powerDialog,
+#desktop.is-locked #workspaces{
+  opacity:0!important;
+  transform:translateY(34px) scale(1.2)!important;
+  filter:blur(12px);
+  pointer-events:none;
+}
+#desktop .desktop-icons,
+#desktop .taskbar,
+#desktop .topbar,
+#desktop #rightPanel,
+#desktop #notificationPanel,
+#desktop #powerDialog,
+#desktop #workspaces{
+  transition:opacity 650ms ease,transform 1050ms cubic-bezier(.16,1,.3,1),filter 850ms ease!important;
+  transform-origin:50% 100%;
+  will-change:opacity,transform,filter;
+}
+#desktop.is-unlocking .desktop-icons,
+#desktop.is-unlocking .taskbar,
+#desktop.is-unlocking .topbar,
+#desktop.is-unlocking #rightPanel,
+#desktop.is-unlocking #notificationPanel,
+#desktop.is-unlocking #powerDialog,
+#desktop.is-unlocking #workspaces{
+  opacity:1!important;
+  transform:translateY(0) scale(1)!important;
+  filter:blur(0);
+  pointer-events:auto;
+}
+#desktop.is-unlocking .desktop-icons{transition-delay:90ms!important}
+#desktop.is-unlocking .taskbar{transition-delay:170ms!important}
+#desktop.is-unlocking .topbar{transition-delay:230ms!important}
+#desktop.is-unlocking #rightPanel,
+#desktop.is-unlocking #notificationPanel{transition-delay:280ms!important}
