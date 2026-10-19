@@ -1806,3 +1806,161 @@ html,body,#desktop{
 .workspace-card:hover{background:#ffffff72!important;box-shadow:none!important}
 .power-dialog button:hover{background:#ffffff60!important;box-shadow:none!important}
 .lock-continue:hover{background:transparent!important;box-shadow:none!important}
+
+
+/* Hinges Control Centre: retain the existing glass theme, rebuild only the control layout. */
+#rightPanel.control-centre-panel{
+  padding:14px 15px 15px!important;
+  gap:0!important;
+  overflow:visible!important;
+}
+#rightPanel.control-centre-panel .cc-top-actions{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:0 0 25px;
+}
+#rightPanel.control-centre-panel .cc-top-action{
+  width:40px;
+  height:40px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:50%;
+  background:rgba(255,255,255,.14);
+  color:inherit;
+  font-size:27px;
+  font-weight:450;
+  line-height:1;
+  box-shadow:none;
+  transition:transform .16s ease,background .16s ease;
+}
+#rightPanel.control-centre-panel .cc-power-action{
+  font-size:23px;
+}
+#rightPanel.control-centre-panel .cc-top-action:active{
+  transform:scale(.94);
+}
+#rightPanel.control-centre-panel .cc-status-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  min-height:25px;
+  margin:0 1px 22px;
+  color:inherit;
+  font-size:15px;
+  line-height:1;
+  white-space:nowrap;
+}
+#rightPanel.control-centre-panel .cc-status-left,
+#rightPanel.control-centre-panel .cc-status-right{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  min-width:0;
+}
+#rightPanel.control-centre-panel .cc-status-left{gap:5px}
+#rightPanel.control-centre-panel .cc-status-signal{
+  width:19px;
+  height:19px;
+  object-fit:contain;
+}
+#rightPanel.control-centre-panel .cc-status-wifi{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+  margin-left:1px;
+}
+#rightPanel.control-centre-panel .cc-carrier{
+  font-size:15px;
+  font-weight:550;
+  letter-spacing:.005em;
+}
+#rightPanel.control-centre-panel .cc-status-right{gap:6px}
+#rightPanel.control-centre-panel .cc-status-mark{
+  display:block;
+  width:17px;
+  height:17px;
+  flex:none;
+}
+#rightPanel.control-centre-panel .cc-battery-percent{
+  font-size:15px;
+  font-weight:520;
+  font-variant-numeric:tabular-nums;
+}
+#rightPanel.control-centre-panel .cc-status-battery{
+  width:29px;
+  height:16px;
+  display:block;
+  object-fit:contain;
+}
+#rightPanel.control-centre-panel .cc-controls-section{
+  width:100%;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#rightPanel.control-centre-panel .quick-grid.control-centre-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:10px!important;
+  width:100%;
+  margin:0!important;
+  padding:0!important;
+}
+#rightPanel.control-centre-panel .control-centre-grid .quick-tile{
+  display:grid!important;
+  place-items:center!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  aspect-ratio:1/1!important;
+  padding:0!important;
+  border-radius:50%!important;
+  text-align:center!important;
+  overflow:hidden;
+  transform:none;
+}
+#rightPanel.control-centre-panel .control-centre-grid .quick-icon{
+  display:block!important;
+  width:34px!important;
+  height:34px!important;
+  max-width:55%!important;
+  max-height:55%!important;
+  object-fit:contain!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:normal!important;
+  font-size:0!important;
+}
+#rightPanel.control-centre-panel .control-centre-grid .quick-tile:active{
+  transform:scale(.95)!important;
+}
+#rightPanel.control-centre-panel .control-centre-grid .quick-tile:focus-visible{
+  outline-offset:2px;
+}
+@media(max-width:400px){
+  #rightPanel.control-centre-panel{
+    width:calc(100vw - 12px)!important;
+    right:6px!important;
+    padding:13px 13px 14px!important;
+  }
+  #rightPanel.control-centre-panel .cc-top-actions{margin-bottom:23px}
+  #rightPanel.control-centre-panel .cc-status-row{gap:8px;margin-bottom:19px}
+  #rightPanel.control-centre-panel .cc-status-right{gap:4px}
+  #rightPanel.control-centre-panel .cc-carrier,
+  #rightPanel.control-centre-panel .cc-battery-percent{font-size:13px}
+  #rightPanel.control-centre-panel .cc-status-signal{width:17px;height:17px}
+  #rightPanel.control-centre-panel .cc-status-wifi{width:19px;height:19px}
+  #rightPanel.control-centre-panel .cc-status-battery{width:25px;height:14px}
+  #rightPanel.control-centre-panel .quick-grid.control-centre-grid{gap:8px!important}
+  #rightPanel.control-centre-panel .control-centre-grid .quick-icon{
+    width:30px!important;height:30px!important
+  }
+}
