@@ -1997,3 +1997,73 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
   filter:none!important;
   pointer-events:auto!important;
 }
+
+
+/* Lock-screen intro: reveal the wallpaper first, then the clock/date, then the unlock hint. */
+@keyframes hinges-lock-wallpaper-in{
+  0%{opacity:0;transform:translate3d(0,18px,0) scale(1.055);filter:blur(13px) brightness(.68)}
+  58%{opacity:.72;filter:blur(5px) brightness(.82)}
+  100%{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0) brightness(1)}
+}
+@keyframes hinges-lock-content-in{
+  0%{opacity:0;translate:0 25px;filter:blur(5px)}
+  66%{opacity:1;filter:blur(.25px)}
+  100%{opacity:1;translate:0 0;filter:blur(0)}
+}
+@keyframes hinges-lock-hint-in{
+  0%{opacity:0;translate:0 20px;filter:blur(4px)}
+  70%{opacity:1;filter:blur(0)}
+  100%{opacity:1;translate:0 0;filter:blur(0)}
+}
+/* Keep the screen itself still; its wallpaper layer is what fades and settles. */
+#desktop:not(.is-unlocking) #lockScreen:not(.is-leaving){
+  animation:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  filter:none!important;
+  background:transparent!important;
+  isolation:isolate!important;
+  transition:none!important;
+}
+#lockScreen::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  background:url("Windows%2011H%20Dark.png") center center / cover no-repeat!important;
+  opacity:0;
+  transform:translate3d(0,18px,0) scale(1.055);
+  filter:blur(13px) brightness(.68);
+  animation:hinges-lock-wallpaper-in 1900ms cubic-bezier(.22,.72,.22,1) 80ms both;
+}
+#lockScreen > .lock-clock-block{
+  z-index:2!important;
+  opacity:0;
+  animation:hinges-lock-content-in 1350ms cubic-bezier(.2,.82,.22,1) 1850ms both;
+}
+#lockScreen > .lock-unlock-hint{
+  z-index:2!important;
+  opacity:0;
+  animation:hinges-lock-hint-in 1200ms cubic-bezier(.2,.82,.22,1) 2450ms both;
+}
+#desktop.is-unlocking #lockScreen::before{
+  animation:none!important;
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+  #lockScreen::before,
+  #lockScreen > .lock-clock-block,
+  #lockScreen > .lock-unlock-hint{
+    animation:none!important;
+    opacity:1!important;
+    translate:none!important;
+    transform:none!important;
+    filter:none!important;
+  }
+  #desktop:not(.is-unlocking) #lockScreen:not(.is-leaving){background:transparent!important}
+}
