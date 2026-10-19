@@ -239,7 +239,7 @@ function enterHingesDesktop(){
    void wallpaper.offsetWidth;
    wallpaper.classList.add("unlock-wallpaper");
  }
- window.setTimeout(()=>{lockScreen.style.display="none";},1150);
+ window.setTimeout(()=>{lockScreen.style.display="none";},1700);
 }
 updateLockClock();
 window.setInterval(updateLockClock,15000);
