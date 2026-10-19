@@ -2526,3 +2526,64 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
     background:repeating-linear-gradient(90deg,#fff 0 3px,transparent 3px 5px)!important;
   }
 }
+
+
+/* Hollow battery outline based on batteryfinal.png. Remove the accidental inner fill and charge marks. */
+#desktop > header.topbar .topbar-right > #menuBarBatteryCrop{
+  position:relative!important;
+  display:block!important;
+  flex:0 0 44px!important;
+  width:44px!important;
+  min-width:44px!important;
+  max-width:44px!important;
+  height:20px!important;
+  min-height:20px!important;
+  max-height:20px!important;
+  margin:0 3px 0 4px!important;
+  padding:0!important;
+  overflow:visible!important;
+  box-sizing:border-box!important;
+}
+#desktop > header.topbar .topbar-right > #menuBarBatteryCrop > #menuBarBattery{
+  position:static!important;
+  display:block!important;
+  width:44px!important;
+  min-width:44px!important;
+  max-width:44px!important;
+  height:20px!important;
+  min-height:20px!important;
+  max-height:20px!important;
+  margin:0!important;
+  padding:0!important;
+  flex:none!important;
+  object-fit:fill!important;
+  transform:none!important;
+  filter:none!important;
+  opacity:1!important;
+}
+#desktop > header.topbar .topbar-right > #menuBarBatteryCrop::before,
+#desktop > header.topbar .topbar-right > #menuBarBatteryCrop::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+}
+@media(max-width:640px){
+  #desktop > header.topbar .topbar-right > #menuBarBatteryCrop{
+    flex-basis:38px!important;
+    width:38px!important;
+    min-width:38px!important;
+    max-width:38px!important;
+    height:18px!important;
+    min-height:18px!important;
+    max-height:18px!important;
+    margin-left:3px!important;
+  }
+  #desktop > header.topbar .topbar-right > #menuBarBatteryCrop > #menuBarBattery{
+    width:38px!important;
+    min-width:38px!important;
+    max-width:38px!important;
+    height:18px!important;
+    min-height:18px!important;
+    max-height:18px!important;
+  }
+}
