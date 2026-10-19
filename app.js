@@ -217,8 +217,6 @@ const weatherButton = $("#weatherButton"); if(weatherButton) weatherButton.addEv
 const openSettingsButton=$("#openSettings");
 if(openSettingsButton)openSettingsButton.addEventListener("click",()=>openApp("Settings"));
 $("#powerButton").addEventListener("click",()=>{hide($("#startMenu"));show($("#powerDialog"))});
-$("#controlPowerButton")?.addEventListener("click",()=>{hide($("#rightPanel"));hide($("#startMenu"));show($("#powerDialog"))});
-$("#addControlButton")?.addEventListener("click",()=>toast("Control Centre customization is coming later"));
 $$("[data-power]").forEach(b=>b.addEventListener("click",()=>{const action=b.dataset.power;hide($("#powerDialog"));if(action==="cancel")return;if(action==="restart"){openWindows.splice(0).forEach(w=>w.element.remove());$("#windowLayer").innerHTML="";toast("Demo desktop restarted")}else toast(action==="sleep"?"Sleep is simulated in this prototype":"Shut down is simulated in this prototype")}));
 $("#clearNotifications")?.addEventListener("click",()=>{$("#notifications").innerHTML='<div class="empty-notifications">You’re all caught up.</div>';toast("Notifications cleared")});
 $("#notifications")?.addEventListener("click",e=>{const b=e.target.closest(".dismiss-note");if(b)b.closest(".notification").remove()});
