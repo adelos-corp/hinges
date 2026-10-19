@@ -195,6 +195,7 @@ $("#systemName").addEventListener("click",()=>{if(!$("#startMenu").classList.con
 
 
 // Wallpaper-first lock screen prototype. This is visual navigation, not authentication.
+const desktop = $("#desktop");
 const lockScreen = $("#lockScreen");
 const lockTime = $("#lockTime");
 const lockDate = $("#lockDate");
@@ -220,10 +221,12 @@ function returnToLock(){
  if(lockReveal){lockReveal.classList.remove("hidden");lockReveal.setAttribute("aria-expanded","false");}
 }
 function enterHingesDesktop(){
- if(!lockScreen)return;
+ if(!lockScreen||!desktop||desktop.classList.contains("is-unlocking"))return;
+ desktop.classList.remove("is-locked");
+ desktop.classList.add("is-unlocking");
  lockScreen.classList.add("is-leaving");
  lockScreen.setAttribute("aria-hidden","true");
- window.setTimeout(()=>{lockScreen.style.display="none";},500);
+ window.setTimeout(()=>{lockScreen.style.display="none";},950);
 }
 updateLockClock();
 window.setInterval(updateLockClock,15000);
