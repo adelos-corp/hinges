@@ -234,10 +234,10 @@ if(lockReveal)lockReveal.addEventListener("click",revealLockSignIn);
 if(lockBack)lockBack.addEventListener("click",returnToLock);
 if(lockContinue)lockContinue.addEventListener("click",enterHingesDesktop);
 if(lockUnlockHint)lockUnlockHint.addEventListener("click",enterHingesDesktop);
-if(lockScreen){
+{
  let touchStartY=null;
- lockScreen.addEventListener("touchstart",e=>{if(e.touches.length===1)touchStartY=e.touches[0].clientY;},{passive:true});
- lockScreen.addEventListener("touchend",e=>{if(touchStartY===null)return;const delta=touchStartY-e.changedTouches[0].clientY;touchStartY=null;if(delta>55)enterHingesDesktop();},{passive:true});
- lockScreen.addEventListener("wheel",e=>{if(e.deltaY>8)enterHingesDesktop();},{passive:true});
- lockScreen.addEventListener("keydown",e=>{if(e.key==="ArrowUp"||e.key==="PageUp"||e.key===" "){e.preventDefault();enterHingesDesktop();}});
+ window.addEventListener("touchstart",e=>{if(e.touches.length===1)touchStartY=e.touches[0].clientY;},{passive:true});
+ window.addEventListener("touchend",e=>{if(touchStartY===null)return;const delta=touchStartY-e.changedTouches[0].clientY;touchStartY=null;if(delta>55)enterHingesDesktop();},{passive:true});
+ window.addEventListener("wheel",e=>{if(e.deltaY>8)enterHingesDesktop();},{passive:true});
+ window.addEventListener("keydown",e=>{if(e.key==="ArrowDown"||e.key==="PageDown"||e.key===" "){if(desktop?.classList.contains("is-locked")){e.preventDefault();enterHingesDesktop();}}});
 }
