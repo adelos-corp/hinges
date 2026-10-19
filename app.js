@@ -44,8 +44,10 @@ function updateDateTime(){
  const menuDate=$("#clockDateTime");
  if(menuDate){
   const date=new Intl.DateTimeFormat("en-IN",{timeZone:zone,day:"numeric",month:"short"}).format(now);
-  const time=new Intl.DateTimeFormat("en-GB",{timeZone:zone,hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(now);
-  menuDate.textContent=date+" "+time;
+  const parts=new Intl.DateTimeFormat("en-US",{timeZone:zone,hour:"numeric",minute:"2-digit",hour12:true}).formatToParts(now);
+  const hour=parts.find(part=>part.type==="hour")?.value||"";
+  const minute=parts.find(part=>part.type==="minute")?.value||"00";
+  menuDate.textContent=date+" "+hour+":"+minute;
  }
  const dateDay=$("#dateDay");
  if(dateDay)dateDay.textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,weekday:"long"}).format(now).toUpperCase();
