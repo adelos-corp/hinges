@@ -1,6 +1,19 @@
 const $ = (s, root=document) => root.querySelector(s);
 const $$ = (s, root=document) => [...root.querySelectorAll(s)];
 
+// Restore the unlocked desktop on refresh in this tab only.
+try{
+ if(sessionStorage.getItem("hingesDesktopUnlocked")==="1"){
+  document.documentElement.setAttribute("data-hinges-start","home");
+  $("#desktop")?.classList.remove("is-locked");
+  const rememberedLockScreen=$("#lockScreen");
+  if(rememberedLockScreen){
+   rememberedLockScreen.style.display="none";
+   rememberedLockScreen.setAttribute("aria-hidden","true");
+  }
+ }
+}catch(e){}
+
 const appNames = [
  ["Edge","e"],["Mail","✉"],["Calendar","▦"],["Photos","▧"],["Settings","⚙"],["Calculator","⌗"],
  ["Notepad","▤"],["Paint","◉"],["Terminal","›_"],["Visual Studio Code","⌘"],["Adobe Photoshop","Ps"],
@@ -64,8 +77,6 @@ function toggleState(key){
  if(key==="airplane"&&states.airplane){states.wifi=false;states.bluetooth=false}
  if((key==="wifi"||key==="bluetooth")&&states[key])states.airplane=false;
  if(key==="night")$("#desktop").classList.toggle("night-mode",states.night);
- $("#appGrid").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(b)openApp(b.dataset.open)});
-$$(".desktop-icons [data-open],.taskbar [data-open]").forEach(b=>b.addEventListener("click",()=>openApp(b.dataset.open)));
 renderStates();
  const labels={wifi:"Wi-Fi",cellular:"Cellular",bluetooth:"Bluetooth",hotspot:"Personal Hotspot",airplane:"Airplane mode",lockscreen:"Lock Screen",touchenabled:"Enable Touch",bell:"Notifications",battery:"Battery saver",night:"Night light",focus:"Focus mode",keyboard:"Keyboard",sound:"Sound"};
  toast((labels[key]||key)+" "+(states[key]?"turned on":"turned off"));
@@ -141,6 +152,8 @@ function renderWorkspaces(){
 }
 $$("[data-close=workspaces]").forEach(b=>b.addEventListener("click",()=>hide($("#workspaces"))));
 $("#workspacesButton").addEventListener("click",toggleWorkspaces);
+$("#appGrid").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(b)openApp(b.dataset.open)});
+$$(".desktop-icons [data-open],.taskbar [data-open]").forEach(b=>b.addEventListener("click",()=>openApp(b.dataset.open)));
 const trayChevron = $("#trayChevron"); if(trayChevron) trayChevron.addEventListener("click",togglePanel);
 const weatherButton = $("#weatherButton"); if(weatherButton) weatherButton.addEventListener("click",()=>openApp("Weather"));
 $("#openSettings").addEventListener("click",()=>openApp("Settings"));
@@ -148,14 +161,28 @@ $("#powerButton").addEventListener("click",()=>{hide($("#startMenu"));show($("#p
 $("#controlPowerButton")?.addEventListener("click",()=>{hide($("#rightPanel"));hide($("#startMenu"));show($("#powerDialog"))});
 $("#addControlButton")?.addEventListener("click",()=>toast("Control Centre customization is coming later"));
 $$("[data-power]").forEach(b=>b.addEventListener("click",()=>{const action=b.dataset.power;hide($("#powerDialog"));if(action==="cancel")return;if(action==="restart"){openWindows.splice(0).forEach(w=>w.element.remove());$("#windowLayer").innerHTML="";toast("Demo desktop restarted")}else toast(action==="sleep"?"Sleep is simulated in this prototype":"Shut down is simulated in this prototype")}));
-$("#clearNotifications").addEventListener("click",()=>{$("#notifications").innerHTML='<div class="empty-notifications">You’re all caught up.</div>';toast("Notifications cleared")});
-$("#notifications").addEventListener("click",e=>{const b=e.target.closest(".dismiss-note");if(b)b.closest(".notification").remove()});
+$("#clearNotifications")?.addEventListener("click",()=>{$("#notifications").innerHTML='<div class="empty-notifications">You’re all caught up.</div>';toast("Notifications cleared")});
+$("#notifications")?.addEventListener("click",e=>{const b=e.target.closest(".dismiss-note");if(b)b.closest(".notification").remove()});
 $$("[data-toggle]").forEach(b=>b.addEventListener("click",()=>toggleState(b.dataset.toggle)));
-$("#volumeSlider").addEventListener("input",e=>{$("#volumeValue").textContent=e.target.value+"%";states.sound=Number(e.target.value)>0;renderStates()});
-$("#brightnessSlider").addEventListener("input",e=>{$("#brightnessValue").textContent=e.target.value+"%";$("#desktop").style.filter="brightness("+(.55+Number(e.target.value)/220)+")"});
-$("#playTrack").addEventListener("click",togglePlayback);$("#prevTrack").addEventListener("click",()=>changeTrack(-1));$("#nextTrack").addEventListener("click",()=>changeTrack(1));
-function togglePlayback(){isPlaying=!isPlaying;$("#playTrack").textContent=isPlaying?"Ⅱ":"▶";$("#trackName").textContent=tracks[trackIndex][0];$("#trackArtist").textContent=isPlaying?tracks[trackIndex][1]+" · Playing":tracks[trackIndex][1]+" · Paused";const appPlay=$("#appPlay");if(appPlay)appPlay.textContent=isPlaying?"Ⅱ Pause":"▶ Play / Pause"}
-function changeTrack(n){trackIndex=(trackIndex+n+tracks.length)%tracks.length;$("#trackName").textContent=tracks[trackIndex][0];$("#trackArtist").textContent=tracks[trackIndex][1];isPlaying=true;$("#playTrack").textContent="Ⅱ"}
+$("#volumeSlider")?.addEventListener("input",e=>{$("#volumeValue").textContent=e.target.value+"%";states.sound=Number(e.target.value)>0;renderStates()});
+$("#brightnessSlider")?.addEventListener("input",e=>{$("#brightnessValue").textContent=e.target.value+"%";$("#desktop").style.filter="brightness("+(.55+Number(e.target.value)/220)+")"});
+$("#playTrack")?.addEventListener("click",togglePlayback);$("#prevTrack")?.addEventListener("click",()=>changeTrack(-1));$("#nextTrack")?.addEventListener("click",()=>changeTrack(1));
+function togglePlayback(){
+ isPlaying=!isPlaying;
+ const playTrack=$("#playTrack"),trackName=$("#trackName"),trackArtist=$("#trackArtist"),appPlay=$("#appPlay");
+ if(playTrack)playTrack.textContent=isPlaying?"Ⅱ":"▶";
+ if(trackName)trackName.textContent=tracks[trackIndex][0];
+ if(trackArtist)trackArtist.textContent=isPlaying?tracks[trackIndex][1]+" · Playing":tracks[trackIndex][1]+" · Paused";
+ if(appPlay)appPlay.textContent=isPlaying?"Ⅱ Pause":"▶ Play / Pause";
+}
+function changeTrack(n){
+ trackIndex=(trackIndex+n+tracks.length)%tracks.length;
+ const trackName=$("#trackName"),trackArtist=$("#trackArtist"),playTrack=$("#playTrack");
+ if(trackName)trackName.textContent=tracks[trackIndex][0];
+ if(trackArtist)trackArtist.textContent=tracks[trackIndex][1];
+ isPlaying=true;
+ if(playTrack)playTrack.textContent="Ⅱ";
+}
 $("#commandForm").addEventListener("submit",e=>{e.preventDefault();runCommand($("#commandInput").value.trim())});
 function runCommand(raw){
  if(!raw)return;const q=raw.toLowerCase();$("#commandInput").value="";
@@ -229,6 +256,7 @@ function returnToLock(){
 }
 function enterHingesDesktop(){
  if(!lockScreen||!desktop||!desktop.classList.contains("is-locked"))return;
+ try{sessionStorage.setItem("hingesDesktopUnlocked","1");}catch(e){}
  desktop.classList.remove("is-locked");
  desktop.classList.add("is-unlocking");
  /* Force the browser to commit the starting frame before running the reveal. */
@@ -257,7 +285,12 @@ if(lockUnlockHint)lockUnlockHint.addEventListener("click",enterHingesDesktop);
 {
  let touchStartY=null;
  window.addEventListener("touchstart",e=>{if(e.touches.length===1)touchStartY=e.touches[0].clientY;},{passive:true});
- window.addEventListener("touchend",e=>{if(touchStartY===null)return;const delta=touchStartY-e.changedTouches[0].clientY;touchStartY=null;if(delta>55)enterHingesDesktop();},{passive:true});
- window.addEventListener("wheel",e=>{if(e.deltaY>0)enterHingesDesktop();},{passive:true,capture:true});
+ window.addEventListener("touchend",e=>{if(touchStartY===null)return;const delta=touchStartY-e.changedTouches[0].clientY;touchStartY=null;if(delta>35)enterHingesDesktop();},{passive:true});
+ const unlockFromScroll=e=>{
+   if(!desktop?.classList.contains("is-locked"))return;
+   if(Math.abs(e.deltaY)>0){e.preventDefault();enterHingesDesktop();}
+  };
+  window.addEventListener("wheel",unlockFromScroll,{passive:false,capture:true});
+  if(lockScreen)lockScreen.addEventListener("wheel",unlockFromScroll,{passive:false});
  window.addEventListener("keydown",e=>{if(e.key==="ArrowDown"||e.key==="PageDown"||e.key===" "){if(desktop?.classList.contains("is-locked")){e.preventDefault();enterHingesDesktop();}}});
 }
