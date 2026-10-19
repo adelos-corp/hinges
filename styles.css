@@ -1198,3 +1198,55 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
   50%{transform:translateY(-2px)}
 }
 
+
+
+/* Minimal glass affordance at the bottom of the dark lock screen. */
+.lock-unlock-hint{
+  position:absolute;
+  left:50%;
+  bottom:clamp(28px,5.5vh,58px);
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:11px;
+  padding:12px 19px 12px 15px;
+  border:1px solid rgba(255,232,211,.2);
+  border-radius:999px;
+  color:rgba(255,248,242,.92);
+  background:rgba(20,16,15,.38);
+  box-shadow:0 8px 30px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.07);
+  backdrop-filter:blur(18px) saturate(120%);
+  -webkit-backdrop-filter:blur(18px) saturate(120%);
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:.015em;
+  white-space:nowrap;
+  cursor:pointer;
+  animation:lock-hint-drift 2.8s ease-in-out infinite;
+  transition:background .2s ease,border-color .2s ease,opacity .2s ease;
+}
+.lock-unlock-hint:hover{
+  background:rgba(52,39,31,.58);
+  border-color:rgba(224,177,139,.48);
+}
+.lock-unlock-chevron{
+  display:grid;
+  place-items:center;
+  width:23px;
+  height:23px;
+  border:1px solid rgba(255,232,211,.2);
+  border-radius:50%;
+  color:#e0b18b;
+  font-size:19px;
+  line-height:1;
+  padding-top:4px;
+}
+@keyframes lock-hint-drift{
+  0%,100%{transform:translate(-50%,0)}
+  50%{transform:translate(-50%,-3px)}
+}
+.lock-screen.is-leaving .lock-unlock-hint{opacity:0;pointer-events:none}
+@media(max-width:520px){
+  .lock-unlock-hint{bottom:30px;font-size:11px;padding:10px 15px 10px 12px}
+}
