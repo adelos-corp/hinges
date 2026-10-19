@@ -57,7 +57,7 @@ function toggleState(key){
  if((key==="wifi"||key==="bluetooth")&&states[key])states.airplane=false;
  if(key==="night")$("#desktop").classList.toggle("night-mode",states.night);
  $("#appGrid").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(b)openApp(b.dataset.open)});
-$(".desktop-icons [data-open],.taskbar [data-open]").forEach(b=>b.addEventListener("click",()=>openApp(b.dataset.open)));
+$$(".desktop-icons [data-open],.taskbar [data-open]").forEach(b=>b.addEventListener("click",()=>openApp(b.dataset.open)));
 renderStates();
  const labels={wifi:"Wi-Fi",bluetooth:"Bluetooth",airplane:"Airplane mode",battery:"Battery saver",night:"Night light",focus:"Focus mode",keyboard:"Keyboard",sound:"Sound"};
  toast((labels[key]||key)+" "+(states[key]?"turned on":"turned off"));
@@ -131,7 +131,7 @@ function renderWorkspaces(){
  if(!wins.length){canvas.innerHTML='<div class="empty-workspace"><span>◇</span><strong>Your space, in view.</strong><small>Open an app from Start to see its window here.</small></div>';return}
  wins.forEach(w=>{const b=document.createElement("button");b.className="workspace-card";b.draggable=true;b.innerHTML='<div class="window-preview">'+(appGlyphs[w.name]||"◇")+'</div><strong>'+w.name+(w.minimized?" · Minimized":"")+'</strong>';b.addEventListener("click",()=>{if(w.minimized){w.minimized=false;w.element.classList.remove("hidden")}hide($("#workspaces"));w.element.style.zIndex=String(30+Date.now()%1000)});b.addEventListener("dragstart",e=>e.dataTransfer.setData("text/plain",String(w.id)));b.addEventListener("dragover",e=>e.preventDefault());b.addEventListener("drop",e=>{e.preventDefault();const id=Number(e.dataTransfer.getData("text/plain"));const moving=openWindows.find(x=>x.id===id);if(moving){moving.space=activeSpace;renderWorkspaces();toast(moving.name+" moved to Desktop "+activeSpace)}});canvas.appendChild(b)});
 }
-$("[data-close=workspaces]").forEach(b=>b.addEventListener("click",()=>hide($("#workspaces"))));
+$$("[data-close=workspaces]").forEach(b=>b.addEventListener("click",()=>hide($("#workspaces"))));
 $("#workspacesButton").addEventListener("click",toggleWorkspaces);
 const trayChevron = $("#trayChevron"); if(trayChevron) trayChevron.addEventListener("click",togglePanel);
 $("#clockButton").addEventListener("click",togglePanel);
