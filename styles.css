@@ -2347,3 +2347,34 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
     flex-basis:34px!important;
   }
 }
+
+
+/* Use a tight-canvas vector so transparent padding cannot make the battery look tiny. */
+#desktop > header.topbar .topbar-right > #menuBarBattery{
+  display:block!important;
+  width:42px!important;
+  height:28px!important;
+  min-width:42px!important;
+  min-height:28px!important;
+  max-width:42px!important;
+  max-height:28px!important;
+  flex:0 0 42px!important;
+  object-fit:fill!important;
+  transform:scale(1.12)!important;
+  transform-origin:center!important;
+  margin:0 3px 0 4px!important;
+  opacity:1!important;
+  filter:none!important;
+}
+@media(max-width:640px){
+  #desktop > header.topbar .topbar-right > #menuBarBattery{
+    width:36px!important;
+    height:24px!important;
+    min-width:36px!important;
+    min-height:24px!important;
+    max-width:36px!important;
+    max-height:24px!important;
+    flex-basis:36px!important;
+    transform:scale(1.08)!important;
+  }
+}
