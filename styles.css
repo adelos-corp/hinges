@@ -706,3 +706,22 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
   filter:blur(3px);
   transform:scale(1.015);
 }
+
+
+/* Keep the blur on a dedicated wallpaper layer, not on the clock or lock icon. */
+.lock-screen{
+  background-image:none;
+  background-color:#050403;
+}
+.lock-screen::before{
+  display:block!important;
+  content:"";
+  position:absolute;
+  inset:-10px;
+  z-index:-1;
+  pointer-events:none;
+  background:url("Windows%2011H%20Dark.png") center/cover no-repeat;
+  filter:blur(3px);
+  transform:scale(1.015);
+}
+.lock-screen::after{display:none}
