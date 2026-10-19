@@ -41,10 +41,16 @@ function toggleWorkspaces(){const el=$("#workspaces");if(!el.classList.contains(
 function updateDateTime(){
  const now=new Date();
  const zone="Asia/Kolkata";
- $("#clockTime").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,hour:"numeric",minute:"2-digit",hour12:true}).format(now);
- $("#clockDate").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,day:"2-digit",month:"2-digit",year:"numeric"}).format(now);
- $("#dateDay").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,weekday:"long"}).format(now).toUpperCase();
- $("#dateFull").textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,day:"numeric",month:"long",year:"numeric"}).format(now);
+ const menuDate=$("#clockDateTime");
+ if(menuDate){
+  const date=new Intl.DateTimeFormat("en-IN",{timeZone:zone,day:"numeric",month:"short"}).format(now);
+  const time=new Intl.DateTimeFormat("en-GB",{timeZone:zone,hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(now);
+  menuDate.textContent=date+" "+time;
+ }
+ const dateDay=$("#dateDay");
+ if(dateDay)dateDay.textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,weekday:"long"}).format(now).toUpperCase();
+ const dateFull=$("#dateFull");
+ if(dateFull)dateFull.textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,day:"numeric",month:"long",year:"numeric"}).format(now);
 }
 updateDateTime();setInterval(updateDateTime,15000);
 function renderStates(){
@@ -134,7 +140,6 @@ function renderWorkspaces(){
 $$("[data-close=workspaces]").forEach(b=>b.addEventListener("click",()=>hide($("#workspaces"))));
 $("#workspacesButton").addEventListener("click",toggleWorkspaces);
 const trayChevron = $("#trayChevron"); if(trayChevron) trayChevron.addEventListener("click",togglePanel);
-$("#clockButton").addEventListener("click",togglePanel);
 const weatherButton = $("#weatherButton"); if(weatherButton) weatherButton.addEventListener("click",()=>openApp("Weather"));
 $("#openSettings").addEventListener("click",()=>openApp("Settings"));
 $("#powerButton").addEventListener("click",()=>{hide($("#startMenu"));show($("#powerDialog"))});
@@ -189,9 +194,7 @@ function renderTopBar(){
   apps.appendChild(b);
  });
 }
-$("#notificationsButton").addEventListener("click",togglePanel);
 $("#controlCentreButton").addEventListener("click",togglePanel);
-$("#systemName").addEventListener("click",()=>{if(!$("#startMenu").classList.contains("hidden"))hide($("#startMenu"));else toggleStart()});
 
 
 // Wallpaper-first lock screen prototype. This is visual navigation, not authentication.
