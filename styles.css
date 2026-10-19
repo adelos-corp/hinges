@@ -1301,3 +1301,69 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
   .lock-unlock-hint{bottom:calc(24px + 14px);font-size:12px;padding:0}
   .lock-unlock-chevron{width:108px;height:5px}
 }
+
+
+/* Unlock transition: the desktop resolves out of a close, oversized state. */
+#desktop.is-locked .wallpaper{
+  transform:scale(1.12);
+  filter:blur(10px) brightness(.72);
+  opacity:.8;
+}
+#desktop .wallpaper{
+  transition:transform 1050ms cubic-bezier(.16,1,.3,1),filter 1050ms cubic-bezier(.16,1,.3,1),opacity 800ms ease;
+  will-change:transform,filter,opacity;
+}
+#desktop.is-locked .desktop-icons,
+#desktop.is-locked #taskbar,
+#desktop.is-locked #menuBar,
+#desktop.is-locked #controlCentre,
+#desktop.is-locked #controlCenter,
+#desktop.is-locked #startMenu,
+#desktop.is-locked #windowLayer{
+  opacity:0;
+  transform:translateY(24px) scale(1.16);
+  filter:blur(9px);
+}
+#desktop .desktop-icons,
+#desktop #taskbar,
+#desktop #menuBar,
+#desktop #controlCentre,
+#desktop #controlCenter,
+#desktop #startMenu,
+#desktop #windowLayer{
+  transform-origin:50% 100%;
+  transition:transform 900ms cubic-bezier(.16,1,.3,1),opacity 560ms ease,filter 760ms ease;
+  will-change:transform,opacity,filter;
+}
+#desktop.is-unlocking .wallpaper{
+  transform:scale(1);
+  filter:blur(0) brightness(1);
+  opacity:1;
+}
+#desktop.is-unlocking .desktop-icons,
+#desktop.is-unlocking #taskbar,
+#desktop.is-unlocking #menuBar,
+#desktop.is-unlocking #controlCentre,
+#desktop.is-unlocking #controlCenter,
+#desktop.is-unlocking #startMenu,
+#desktop.is-unlocking #windowLayer{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+}
+#desktop.is-unlocking .desktop-icons{transition-delay:100ms}
+#desktop.is-unlocking #taskbar{transition-delay:140ms}
+#desktop.is-unlocking #menuBar{transition-delay:190ms}
+#desktop.is-unlocking #controlCentre,
+#desktop.is-unlocking #controlCenter{transition-delay:230ms}
+#desktop.is-unlocking #startMenu,
+#desktop.is-unlocking #windowLayer{transition-delay:270ms}
+#desktop .lock-screen{
+  transition:opacity 520ms ease,transform 900ms cubic-bezier(.16,1,.3,1),filter 650ms ease;
+}
+#desktop.is-unlocking .lock-screen{
+  opacity:0;
+  transform:scale(1.09);
+  filter:blur(12px);
+  pointer-events:none;
+}
