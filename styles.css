@@ -575,3 +575,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{
 
 /* Slightly thicken the supplied lock glyph while keeping its white outline. */
 .lock-symbol{filter:brightness(0) invert(1) contrast(1.25) drop-shadow(0 0 0 #fff) drop-shadow(.35px 0 0 #fff) drop-shadow(-.35px 0 0 #fff) drop-shadow(0 1px 5px rgba(20,14,32,.3))}
+
+
+/* Nudge the complete lock-screen icon/date/clock group slightly upward. */
+.lock-clock-block{top:10.5%}
