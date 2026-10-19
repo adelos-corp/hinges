@@ -523,3 +523,12 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{
 .lock-back:hover{text-decoration:underline}
 @media(max-width:700px){.lock-clock-block{top:28%;left:28px;right:20px}.lock-time{font-size:clamp(76px,22vw,132px)}.lock-date{margin-top:12px;font-size:15px}.lock-reveal{bottom:95px}.lock-signin{left:50%;right:auto;top:50%;transform:translate(-50%,-50%);width:min(330px,calc(100vw - 36px))}@keyframes lockCardIn{from{opacity:0;transform:translate(-50%,calc(-50% + 12px)) scale(.98)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}.lock-signin.hidden{display:none!important}.lock-edition{font-size:8px}.lock-status{gap:11px}}
 @media(prefers-reduced-motion:reduce){.lock-screen,.lock-reveal,.lock-continue{transition:none}.lock-signin{animation:none}}
+
+
+/* Minimal lock screen: centered wallpaper composition and clock only. */
+.lock-screen{position:absolute;inset:0;z-index:100;overflow:hidden;color:#fff;background-color:#a9a0bb;background-image:url("Abstract%20Dreamscapes%20(4).png");background-position:center center;background-size:cover;background-repeat:no-repeat}
+.lock-screen::before,.lock-shade{display:none!important}
+.lock-clock-block{position:absolute;top:50%;left:50%;right:auto;transform:translate(-50%,-50%);width:max-content;max-width:calc(100vw - 32px);text-align:center;text-shadow:0 3px 32px rgba(20,14,32,.3);user-select:none}
+.lock-time{display:block;font-size:clamp(76px,13vw,160px);font-weight:300;letter-spacing:-.085em;line-height:.95;font-variant-numeric:tabular-nums}
+.lock-date{margin-top:16px;font-size:clamp(14px,1.8vw,21px);font-weight:450;letter-spacing:-.02em;color:#ffffffed}
+.lock-topline,.lock-reveal,.lock-bottom,.lock-signin{display:none!important}
