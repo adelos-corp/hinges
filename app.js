@@ -29,7 +29,7 @@ if(appGrid){
 }
 let activeSpace=1, spaces=1, nextWindowId=1, toastTimer, trackIndex=0, isPlaying=false;
 const openWindows=[];
-const states={wifi:true,bluetooth:true,airplane:false,battery:false,night:false,focus:false,keyboard:false,sound:true};
+const states={wifi:true,cellular:true,bluetooth:true,hotspot:false,airplane:false,lockscreen:true,touchenabled:true,bell:false,battery:false,night:false,focus:false,keyboard:false,sound:true};
 const tracks=[["A quiet afternoon","Hinges Demo"],["Soft geometry","Hinges Demo"],["Pearlescent skies","Hinges Demo"]];
 function toast(message){const el=$("#toast");el.textContent=message;el.classList.remove("hidden");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add("hidden"),2400)}
 function show(el){el.classList.remove("hidden")}
@@ -67,7 +67,7 @@ function toggleState(key){
  $("#appGrid").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(b)openApp(b.dataset.open)});
 $$(".desktop-icons [data-open],.taskbar [data-open]").forEach(b=>b.addEventListener("click",()=>openApp(b.dataset.open)));
 renderStates();
- const labels={wifi:"Wi-Fi",bluetooth:"Bluetooth",airplane:"Airplane mode",battery:"Battery saver",night:"Night light",focus:"Focus mode",keyboard:"Keyboard",sound:"Sound"};
+ const labels={wifi:"Wi-Fi",cellular:"Cellular",bluetooth:"Bluetooth",hotspot:"Personal Hotspot",airplane:"Airplane mode",lockscreen:"Lock Screen",touchenabled:"Enable Touch",bell:"Notifications",battery:"Battery saver",night:"Night light",focus:"Focus mode",keyboard:"Keyboard",sound:"Sound"};
  toast((labels[key]||key)+" "+(states[key]?"turned on":"turned off"));
 }
 function windowMarkup(name,id){
@@ -145,6 +145,8 @@ const trayChevron = $("#trayChevron"); if(trayChevron) trayChevron.addEventListe
 const weatherButton = $("#weatherButton"); if(weatherButton) weatherButton.addEventListener("click",()=>openApp("Weather"));
 $("#openSettings").addEventListener("click",()=>openApp("Settings"));
 $("#powerButton").addEventListener("click",()=>{hide($("#startMenu"));show($("#powerDialog"))});
+$("#controlPowerButton")?.addEventListener("click",()=>{hide($("#rightPanel"));hide($("#startMenu"));show($("#powerDialog"))});
+$("#addControlButton")?.addEventListener("click",()=>toast("Control Centre customization is coming later"));
 $$("[data-power]").forEach(b=>b.addEventListener("click",()=>{const action=b.dataset.power;hide($("#powerDialog"));if(action==="cancel")return;if(action==="restart"){openWindows.splice(0).forEach(w=>w.element.remove());$("#windowLayer").innerHTML="";toast("Demo desktop restarted")}else toast(action==="sleep"?"Sleep is simulated in this prototype":"Shut down is simulated in this prototype")}));
 $("#clearNotifications").addEventListener("click",()=>{$("#notifications").innerHTML='<div class="empty-notifications">You’re all caught up.</div>';toast("Notifications cleared")});
 $("#notifications").addEventListener("click",e=>{const b=e.target.closest(".dismiss-note");if(b)b.closest(".notification").remove()});
