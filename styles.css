@@ -557,3 +557,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{
 
 /* Final lock-screen micro-adjustment: nudge the date slightly toward the clock. */
 .lock-date{transform:translateY(3px)}
+
+
+/* Lock-screen composition: keep the date and clock together, centered horizontally near the top. */
+.lock-clock-block{top:12%;left:50%;right:auto;transform:translateX(-50%);text-align:center}
