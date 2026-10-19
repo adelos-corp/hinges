@@ -2587,3 +2587,36 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
     max-height:18px!important;
   }
 }
+
+
+/* Display the uploaded batteryfinal.png directly. No wrapper, crop, masks, or drawn interior. */
+#desktop > header.topbar .topbar-right > #menuBarBattery{
+  display:block!important;
+  width:36px!important;
+  height:17px!important;
+  min-width:36px!important;
+  min-height:17px!important;
+  max-width:36px!important;
+  max-height:17px!important;
+  flex:0 0 36px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  margin:0 0 0 4px!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  filter:none!important;
+  transform:none!important;
+  opacity:1!important;
+}
+@media(max-width:640px){
+  #desktop > header.topbar .topbar-right > #menuBarBattery{
+    width:32px!important;
+    height:15px!important;
+    min-width:32px!important;
+    min-height:15px!important;
+    max-width:32px!important;
+    max-height:15px!important;
+    flex-basis:32px!important;
+  }
+}
