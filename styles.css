@@ -2794,3 +2794,6 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
 #lockScreen::before{
   inset:-12px!important;
 }
+
+/* Keep the hidden state authoritative when the Control Centre has been closed. */
+#desktop #rightPanel.control-centre-panel.hidden{display:none!important}
