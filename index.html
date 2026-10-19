@@ -72,15 +72,14 @@
 
   <header class="topbar" aria-label="System bar">
     <div class="topbar-left">
-      <button class="system-name" id="systemName" title="Hinges desktop">Hinges</button>
-      <span class="current-app" id="currentApp">Desktop</span>
-      <button class="topbar-icon notification-trigger" id="notificationsButton" aria-label="Notifications" title="Notifications"><span class="notification-dot"></span>♧</button>
+      <button class="topbar-icon control-trigger" id="controlCentreButton" aria-label="Open Control Centre" title="Control Centre">
+        <img class="control-centre-icon" src="control%20centre.png" alt="" draggable="false">
+      </button>
     </div>
-    <button class="topbar-icon control-trigger" id="controlCentreButton" aria-label="Control Centre" title="Control Centre">☷</button>
     <div class="topbar-right">
-      <div class="background-apps" id="backgroundApps" aria-label="Background apps"></div>
-      <img class="battery-status" src="battery_white_transparent.png" alt="Battery" title="Battery status">
-      <button id="clockButton" class="clock-button"><strong id="clockTime">9:41 AM</strong><small id="clockDate">17/10/2026</small></button>
+      <div id="clockButton" class="clock-button" aria-label="Current date and time">
+        <strong id="clockDateTime">19 Oct 14:08</strong>
+      </div>
     </div>
   </header>
   <nav class="taskbar" aria-label="Applications dock">
