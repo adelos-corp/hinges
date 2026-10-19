@@ -350,7 +350,7 @@ function lockHingesDesktop(){
  desktop.classList.remove("is-locked");
  void lockScreen.offsetWidth;
  desktop.classList.add("is-locking","is-locked");
- window.setTimeout(()=>desktop.classList.remove("is-locking"),2600);
+ // Keep the locking state through the locked session so entrance animations stay settled.
 }
 updateLockClock();
 window.setInterval(updateLockClock,15000);
