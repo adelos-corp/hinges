@@ -548,3 +548,8 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{
 /* Tighten the date-to-clock spacing so the date sits just above the time. */
 .lock-clock-block{gap:4px}
 .lock-date{line-height:1.2}
+
+
+/* Date and clock should read as one tight typographic unit. */
+.lock-clock-block{gap:0}
+.lock-date{line-height:1.05}
