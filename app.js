@@ -133,9 +133,9 @@ function renderWorkspaces(){
 }
 $("[data-close=workspaces]").forEach(b=>b.addEventListener("click",()=>hide($("#workspaces"))));
 $("#workspacesButton").addEventListener("click",toggleWorkspaces);
-$("#trayChevron").addEventListener("click",togglePanel);
+const trayChevron = $("#trayChevron"); if(trayChevron) trayChevron.addEventListener("click",togglePanel);
 $("#clockButton").addEventListener("click",togglePanel);
-$("#weatherButton").addEventListener("click",()=>openApp("Weather"));
+const weatherButton = $("#weatherButton"); if(weatherButton) weatherButton.addEventListener("click",()=>openApp("Weather"));
 $("#openSettings").addEventListener("click",()=>openApp("Settings"));
 $("#powerButton").addEventListener("click",()=>{hide($("#startMenu"));show($("#powerDialog"))});
 $$("[data-power]").forEach(b=>b.addEventListener("click",()=>{const action=b.dataset.power;hide($("#powerDialog"));if(action==="cancel")return;if(action==="restart"){openWindows.splice(0).forEach(w=>w.element.remove());$("#windowLayer").innerHTML="";toast("Demo desktop restarted")}else toast(action==="sleep"?"Sleep is simulated in this prototype":"Shut down is simulated in this prototype")}));
@@ -192,3 +192,46 @@ function renderTopBar(){
 $("#notificationsButton").addEventListener("click",togglePanel);
 $("#controlCentreButton").addEventListener("click",togglePanel);
 $("#systemName").addEventListener("click",()=>{if(!$("#startMenu").classList.contains("hidden"))hide($("#startMenu"));else toggleStart()});
+
+
+// Wallpaper-first lock screen prototype. This is visual navigation, not authentication.
+const lockScreen = $("#lockScreen");
+const lockTime = $("#lockTime");
+const lockDate = $("#lockDate");
+const lockReveal = $("#lockReveal");
+const lockSignIn = $("#lockSignIn");
+const lockContinue = $("#lockContinue");
+const lockBack = $("#lockBack");
+function updateLockClock(){
+ if(!lockTime||!lockDate)return;
+ const now=new Date();
+ const zone="Asia/Kolkata";
+ lockTime.textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,hour:"numeric",minute:"2-digit",hour12:false}).format(now);
+ lockDate.textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,weekday:"long",month:"long",day:"numeric"}).format(now);
+}
+function revealLockSignIn(){
+ if(!lockScreen||lockScreen.classList.contains("is-leaving")||!lockSignIn)return;
+ lockSignIn.classList.remove("hidden");
+ if(lockReveal){lockReveal.classList.add("hidden");lockReveal.setAttribute("aria-expanded","true");}
+}
+function returnToLock(){
+ if(lockSignIn)lockSignIn.classList.add("hidden");
+ if(lockReveal){lockReveal.classList.remove("hidden");lockReveal.setAttribute("aria-expanded","false");}
+}
+function enterHingesDesktop(){
+ if(!lockScreen)return;
+ lockScreen.classList.add("is-leaving");
+ lockScreen.setAttribute("aria-hidden","true");
+ window.setTimeout(()=>{lockScreen.style.display="none";},500);
+}
+updateLockClock();
+window.setInterval(updateLockClock,15000);
+if(lockReveal)lockReveal.addEventListener("click",revealLockSignIn);
+if(lockBack)lockBack.addEventListener("click",returnToLock);
+if(lockContinue)lockContinue.addEventListener("click",enterHingesDesktop);
+if(lockScreen){
+ let touchStartY=null;
+ lockScreen.addEventListener("touchstart",e=>{if(e.touches.length===1)touchStartY=e.touches[0].clientY;},{passive:true});
+ lockScreen.addEventListener("touchend",e=>{if(touchStartY===null)return;const delta=touchStartY-e.changedTouches[0].clientY;touchStartY=null;if(delta>55&&lockSignIn?.classList.contains("hidden"))revealLockSignIn();},{passive:true});
+ lockScreen.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&lockSignIn?.classList.contains("hidden")){e.preventDefault();revealLockSignIn();}});
+}
