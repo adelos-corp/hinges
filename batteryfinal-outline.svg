@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="432" height="197" viewBox="0 0 432 197" fill="none">
-  <defs>
-    <mask id="battery-outline" maskUnits="userSpaceOnUse" x="0" y="0" width="432" height="197">
-      <image href="batteryfinal.png" x="0" y="0" width="432" height="197" preserveAspectRatio="none"/>
-      <rect x="29" y="28" width="323" height="141" rx="20" fill="#000000"/>
-    </mask>
-  </defs>
-  <rect width="432" height="197" fill="#FFFFFF" mask="url(#battery-outline)"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="432" height="197" viewBox="0 0 432 197" fill="none" role="img" aria-label="Battery">
+  <path fill="#FFFFFF" fill-rule="evenodd" clip-rule="evenodd" d="
+    M40 2
+    H338
+    C360 2 374 16 374 38
+    V58 H389
+    C411 58 428 76 428 98
+    C428 120 411 139 389 139
+    H374 V159
+    C374 181 360 195 338 195
+    H40
+    C18 195 4 181 4 159
+    V38
+    C4 16 18 2 40 2
+    Z
+    M43 29
+    C34 29 29 35 29 44
+    V153
+    C29 163 34 168 43 168
+    H335
+    C345 168 350 163 350 153
+    V44
+    C350 35 345 29 335 29
+    Z
+  "/>
 </svg>
