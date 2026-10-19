@@ -2155,3 +2155,152 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
     max-width:24px!important;max-height:24px!important;
   }
 }
+
+
+/* HINGES 0.0.3: floating Control Centre, edge insets, and stateful menu-bar icons. */
+#rightPanel.control-centre-panel{
+  background:transparent!important;
+  background-color:transparent!important;
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  border-radius:0!important;
+}
+#rightPanel.control-centre-panel::before,
+#rightPanel.control-centre-panel::after{
+  display:none!important;
+  content:none!important;
+}
+#desktop > header.topbar .topbar-left{
+  padding-left:12px!important;
+  padding-right:0!important;
+  gap:8px!important;
+  overflow:visible!important;
+}
+#desktop > header.topbar #controlCentreButton{
+  flex:0 0 24px!important;
+}
+#activeControlIndicators{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:7px;
+  min-width:0;
+  height:44px;
+  overflow:visible;
+}
+.menu-control-indicator{
+  display:grid;
+  place-items:center;
+  width:18px;
+  height:22px;
+  flex:0 0 18px;
+  opacity:1;
+  transform:translateX(0) scale(1);
+  animation:hinges-indicator-in 300ms cubic-bezier(.2,.8,.2,1) both;
+  will-change:transform,opacity;
+}
+.menu-control-indicator img{
+  display:block;
+  width:16px;
+  height:16px;
+  object-fit:contain;
+  filter:brightness(0) invert(1);
+  user-select:none;
+  pointer-events:none;
+}
+.menu-control-indicator.is-removing{
+  animation:hinges-indicator-out 200ms cubic-bezier(.4,0,1,1) both;
+  pointer-events:none;
+}
+@keyframes hinges-indicator-in{
+  from{opacity:0;transform:translateX(-5px) scale(.72);filter:blur(2px)}
+  to{opacity:1;transform:translateX(0) scale(1);filter:blur(0)}
+}
+@keyframes hinges-indicator-out{
+  from{opacity:1;transform:translateX(0) scale(1);filter:blur(0)}
+  to{opacity:0;transform:translateX(-4px) scale(.72);filter:blur(2px)}
+}
+#desktop > header.topbar .topbar-right{
+  padding-right:12px!important;
+  padding-left:0!important;
+  gap:8px!important;
+}
+#desktop > header.topbar #clockButton.clock-button{
+  margin:0!important;
+  padding:0!important;
+  pointer-events:none!important;
+}
+#menuBarBattery{
+  display:block!important;
+  width:19px!important;
+  height:12px!important;
+  min-width:19px!important;
+  object-fit:contain!important;
+  flex:0 0 19px!important;
+  opacity:.96;
+  filter:drop-shadow(0 1px 5px rgba(0,0,0,.3));
+  margin:0!important;
+}
+#desktop.is-locked > header.topbar,
+#desktop.is-locking > header.topbar{
+  z-index:120!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  translate:none!important;
+  filter:none!important;
+  pointer-events:auto!important;
+}
+#desktop.is-locked #lockScreen,
+#desktop.is-locking #lockScreen{
+  z-index:100!important;
+}
+@keyframes hinges-lockscreen-reentry{
+  from{opacity:0;transform:scale(1.018);filter:blur(4px)}
+  60%{opacity:1;filter:blur(.4px)}
+  to{opacity:1;transform:scale(1);filter:blur(0)}
+}
+@keyframes hinges-lock-wallpaper-reentry{
+  from{opacity:0;transform:translate3d(0,14px,0) scale(1.045);filter:blur(11px) brightness(.68)}
+  60%{opacity:.8;filter:blur(3px) brightness(.86)}
+  to{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0) brightness(1)}
+}
+@keyframes hinges-lock-content-reentry{
+  from{opacity:0;translate:0 22px;filter:blur(4px)}
+  70%{opacity:1;filter:blur(0)}
+  to{opacity:1;translate:0 0;filter:blur(0)}
+}
+#desktop.is-locking #lockScreen{
+  visibility:visible!important;
+  opacity:1!important;
+  animation:hinges-lockscreen-reentry 720ms cubic-bezier(.2,.82,.22,1) both!important;
+}
+#desktop.is-locking #lockScreen::before{
+  animation:hinges-lock-wallpaper-reentry 1450ms cubic-bezier(.22,.72,.22,1) 40ms both!important;
+}
+#desktop.is-locking #lockScreen > .lock-clock-block{
+  opacity:0;
+  animation:hinges-lock-content-reentry 1050ms cubic-bezier(.2,.82,.22,1) 500ms both!important;
+}
+#desktop.is-locking #lockScreen > .lock-unlock-hint{
+  opacity:0;
+  animation:hinges-lock-content-reentry 900ms cubic-bezier(.2,.82,.22,1) 950ms both!important;
+}
+@media(max-width:640px){
+  #desktop > header.topbar .topbar-left{padding-left:10px!important;gap:6px!important}
+  #desktop > header.topbar .topbar-right{padding-right:10px!important;gap:6px!important}
+  .menu-control-indicator{width:16px;flex-basis:16px}
+  .menu-control-indicator img{width:14px;height:14px}
+  #menuBarBattery{width:17px!important;height:11px!important;min-width:17px!important;flex-basis:17px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .menu-control-indicator,
+  .menu-control-indicator.is-removing{animation:none!important}
+  #desktop.is-locking #lockScreen,
+  #desktop.is-locking #lockScreen::before,
+  #desktop.is-locking #lockScreen > .lock-clock-block,
+  #desktop.is-locking #lockScreen > .lock-unlock-hint{animation:none!important}
+}
