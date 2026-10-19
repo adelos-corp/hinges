@@ -2101,12 +2101,18 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
 }
 
 
-/* Control Centre quick controls: compact circular buttons closely surrounding each glyph. */
+/* Tighter, centered 4×2 Control Centre cluster. Keep the existing button and glyph sizes. */
 #rightPanel.control-centre-panel .quick-grid.control-centre-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,48px)!important;
+  justify-content:center!important;
   justify-items:center!important;
   align-items:center!important;
   column-gap:8px!important;
-  row-gap:10px!important;
+  row-gap:8px!important;
+  width:100%;
+  margin:0!important;
+  padding:0!important;
 }
 #rightPanel.control-centre-panel .control-centre-grid .quick-tile{
   width:48px!important;
@@ -2130,6 +2136,11 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
   max-height:25px!important;
 }
 @media(max-width:400px){
+  #rightPanel.control-centre-panel .quick-grid.control-centre-grid{
+    grid-template-columns:repeat(4,46px)!important;
+    column-gap:6px!important;
+    row-gap:7px!important;
+  }
   #rightPanel.control-centre-panel .control-centre-grid .quick-tile{
     width:46px!important;
     min-width:46px!important;
