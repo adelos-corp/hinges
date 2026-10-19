@@ -206,7 +206,7 @@ function updateLockClock(){
  if(!lockTime||!lockDate)return;
  const now=new Date();
  const zone="Asia/Kolkata";
- lockTime.textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,hour:"numeric",minute:"2-digit",hour12:false}).format(now);
+ lockTime.textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,hour:"2-digit",minute:"2-digit",hour12:false}).format(now);
  lockDate.textContent=new Intl.DateTimeFormat("en-IN",{timeZone:zone,weekday:"short",day:"numeric",month:"short"}).format(now).replace(/,/g,"");
 }
 function revealLockSignIn(){
