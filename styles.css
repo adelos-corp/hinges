@@ -2797,3 +2797,47 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
 
 /* Keep the hidden state authoritative when the Control Centre has been closed. */
 #desktop #rightPanel.control-centre-panel.hidden{display:none!important}
+
+
+/* Replace the panel-shaped blur with a feathered, screen-blended blur field around the controls. */
+#desktop #rightPanel.control-centre-panel::before{
+  content:""!important;
+  display:block!important;
+  position:fixed!important;
+  left:0!important;
+  top:0!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:440px!important;
+  height:360px!important;
+  z-index:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:radial-gradient(
+    ellipse 255px 218px at 124px 92px,
+    rgba(245,241,255,.075) 0%,
+    rgba(245,241,255,.045) 36%,
+    rgba(245,241,255,.018) 61%,
+    rgba(245,241,255,0) 100%
+  )!important;
+  backdrop-filter:blur(21px) saturate(132%)!important;
+  -webkit-backdrop-filter:blur(21px) saturate(132%)!important;
+  -webkit-mask-image:radial-gradient(
+    ellipse 255px 218px at 124px 92px,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,.92) 38%,
+    rgba(0,0,0,.58) 62%,
+    rgba(0,0,0,.2) 82%,
+    rgba(0,0,0,0) 100%
+  )!important;
+  mask-image:radial-gradient(
+    ellipse 255px 218px at 124px 92px,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,.92) 38%,
+    rgba(0,0,0,.58) 62%,
+    rgba(0,0,0,.2) 82%,
+    rgba(0,0,0,0) 100%
+  )!important;
+  box-shadow:none!important;
+  pointer-events:none!important;
+}
