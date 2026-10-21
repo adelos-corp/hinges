@@ -2841,3 +2841,83 @@ html[data-hinges-start="home"] #desktop.is-locked #powerDialog{
   box-shadow:none!important;
   pointer-events:none!important;
 }
+
+
+/* Translucent 3D glass controls: remove the white ring and build depth from light, refraction and shadow. */
+#desktop #rightPanel.control-centre-panel > .quick-grid.control-centre-grid > .quick-tile{
+  position:relative!important;
+  isolation:isolate!important;
+  border:1px solid rgba(255,255,255,.035)!important;
+  outline:0!important;
+  background:
+    radial-gradient(ellipse at 28% 18%,rgba(255,255,255,.22) 0%,rgba(255,255,255,.075) 28%,rgba(255,255,255,0) 64%),
+    radial-gradient(ellipse at 78% 86%,rgba(14,10,28,.18) 0%,rgba(14,10,28,.055) 38%,rgba(14,10,28,0) 68%),
+    linear-gradient(145deg,rgba(255,255,255,.075) 0%,rgba(255,255,255,.025) 48%,rgba(12,10,23,.085) 100%)!important;
+  backdrop-filter:blur(13px) saturate(170%)!important;
+  -webkit-backdrop-filter:blur(13px) saturate(170%)!important;
+  box-shadow:
+    inset 0 1.5px 2px rgba(255,255,255,.19),
+    inset 1px 0 1px rgba(255,255,255,.055),
+    inset 0 -2px 3px rgba(10,8,20,.16),
+    0 5px 12px rgba(0,0,0,.12),
+    0 1px 2px rgba(0,0,0,.08)!important;
+  transform:translateZ(0)!important;
+  transition:background .22s ease,box-shadow .22s ease,transform .22s cubic-bezier(.2,.8,.2,1)!important;
+}
+#desktop #rightPanel.control-centre-panel > .quick-grid.control-centre-grid > .quick-tile::before{
+  content:""!important;
+  position:absolute!important;
+  inset:1px!important;
+  z-index:0!important;
+  border-radius:inherit!important;
+  background:linear-gradient(150deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.035) 28%,rgba(255,255,255,0) 54%,rgba(255,255,255,.018) 100%)!important;
+  opacity:.88!important;
+  pointer-events:none!important;
+}
+#desktop #rightPanel.control-centre-panel > .quick-grid.control-centre-grid > .quick-tile::after{
+  content:""!important;
+  position:absolute!important;
+  left:10px!important;
+  top:5px!important;
+  width:17px!important;
+  height:7px!important;
+  z-index:0!important;
+  border-radius:50%!important;
+  background:rgba(255,255,255,.105)!important;
+  filter:blur(4px)!important;
+  opacity:.72!important;
+  pointer-events:none!important;
+}
+#desktop #rightPanel.control-centre-panel .control-centre-grid .quick-icon{
+  position:relative!important;
+  z-index:1!important;
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.09))!important;
+}
+#desktop #rightPanel.control-centre-panel > .quick-grid.control-centre-grid > .quick-tile:hover{
+  border-color:rgba(255,255,255,.055)!important;
+  box-shadow:
+    inset 0 1.5px 2px rgba(255,255,255,.23),
+    inset 1px 0 1px rgba(255,255,255,.065),
+    inset 0 -2px 3px rgba(10,8,20,.14),
+    0 7px 15px rgba(0,0,0,.14),
+    0 1px 2px rgba(0,0,0,.08)!important;
+  transform:translateY(-1px) translateZ(0)!important;
+}
+#desktop #rightPanel.control-centre-panel > .quick-grid.control-centre-grid > .quick-tile:active{
+  transform:translateY(1px) scale(.975)!important;
+  box-shadow:
+    inset 0 2px 4px rgba(8,6,16,.13),
+    inset 0 1px 1px rgba(255,255,255,.16),
+    0 1px 3px rgba(0,0,0,.09)!important;
+}
+#desktop #rightPanel.control-centre-panel > .quick-grid.control-centre-grid > .quick-tile.selected{
+  border-color:rgba(255,255,255,.045)!important;
+  background:
+    radial-gradient(ellipse at 28% 18%,rgba(255,255,255,.26) 0%,rgba(255,255,255,.08) 30%,transparent 66%),
+    radial-gradient(ellipse at 80% 90%,rgba(89,52,154,.17) 0%,transparent 68%),
+    linear-gradient(145deg,rgba(188,156,255,.16),rgba(113,82,184,.095))!important;
+  box-shadow:
+    inset 0 1.5px 2px rgba(255,255,255,.22),
+    inset 0 -2px 3px rgba(45,22,85,.12),
+    0 5px 12px rgba(0,0,0,.11)!important;
+}
